@@ -14,23 +14,7 @@
     </ion-card-header>
 
     <ion-card-content>
-      <ion-card>
-        <ion-card-content>
-          <ion-label>Username</ion-label>
-          <ion-input></ion-input>
-        </ion-card-content>
-      </ion-card>
-      <ion-card>
-        <ion-card-content>
-          <ion-label>Password</ion-label>
-          <ion-input></ion-input>
-        </ion-card-content>
-      </ion-card>
-      <div style="display: flex; justify-content: space-between;">
-        <ion-button>Create</ion-button>
-        <ion-button>Login</ion-button>
-      </div>
-
+      <ion-button (click)="accountService.login();">LOGIN WITH GOOGLE</ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>

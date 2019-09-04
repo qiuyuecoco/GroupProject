@@ -3,36 +3,74 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Movies List</ion-title>
+    <ion-title>Top Rated Movies List</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card *ngIf="!saved">
-    <ion-card-header>No previously searched items...</ion-card-header>
-    <ion-card-content>
-      <p>You currently don't have any saved movies.</p>
-      <p>First select a movie, then you can see your saved movies.</p>
-      <ion-button shape="round" color="primary" expand="full" (click)="goToMovies()">
-        <ion-icon name="search"></ion-icon>&nbsp;Find a Movie
-      </ion-button>
+<!--  <ion-card *ngFor="let movie of movies">-->
+  <ion-card *ngIf="movies" >
+    <ion-card-content *ngFor="let movie of movies.results">
+      <ion-card-header> {{ movie.original_title }} </ion-card-header>
+        <ion-list>
+          <ion-item>
+            <img src="{{ movie.poster_path }}">
+          </ion-item>
+        </ion-list>
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="saved">
-    <!--    <ion-card-header>Followed Teams</ion-card-header>-->
-    <ion-card-content>
-      <ion-list>
-        <ion-list-header>Followed Teams:</ion-list-header>
-        <ion-item *ngFor="let item of saved" (click)="savedTapped(item)">
-          <ion-icon name="star"></ion-icon>&nbsp;
-<!--          <p>{{ item.team.name }} - {{ item.tournamentName }}</p>-->
-        </ion-item>
-      </ion-list>
-      <p>To add more to your watchlist, select a movie, then you can add them to your list.</p>
-      <ion-button shape="round" color="primary" expand="full" (click)="goToMovies()">
-        <ion-icon name="search"></ion-icon>&nbsp;Find a Movie
-      </ion-button>
-    </ion-card-content>
-  </ion-card>
+
+<!--  <ion-card *ngIf="movies">-->
+<!--    <ion-card-content *ngFor="let movie of movies">-->
+<!--      <ion-card-header> {{ movie.title }}</ion-card-header>-->
+<!--      <ion-grid>-->
+<!--        <ion-row>-->
+<!--          <ion-list>-->
+<!--            <ion-item *ngFor="let movie of movies.results">-->
+<!--              <ion-grid>-->
+<!--                <ion-row>-->
+<!--                  <ion-col>-->
+<!--                    <img src="{{movie.backdrop_path}}">-->
+<!--                  </ion-col>-->
+<!--                  <ion-col>-->
+<!--                    <p>{{ movie.original_title }}</p>-->
+<!--                    <p>{{ movie.popularity }}</p>-->
+<!--                  </ion-col>-->
+<!--                </ion-row>-->
+<!--              </ion-grid>-->
+<!--            </ion-item>-->
+<!--          </ion-list>-->
+<!--        </ion-row>-->
+<!--      </ion-grid>-->
+<!--    </ion-card-content>-->
+<!--  </ion-card>-->
+
+<!--  <ion-card *ngIf="!saved">-->
+<!--    <ion-card-header>No previously searched items...</ion-card-header>-->
+<!--    <ion-card-content>-->
+<!--      <p>You currently don't have any saved movies.</p>-->
+<!--      <p>First select a movie, then you can see your saved movies.</p>-->
+<!--      <ion-button shape="round" color="primary" expand="full" (click)="goToMovies()">-->
+<!--        <ion-icon name="search"></ion-icon>&nbsp;Find a Movie-->
+<!--      </ion-button>-->
+<!--    </ion-card-content>-->
+<!--  </ion-card>-->
+
+<!--  <ion-card *ngIf="saved">-->
+<!--    &lt;!&ndash;    <ion-card-header>Followed Teams</ion-card-header>&ndash;&gt;-->
+<!--    <ion-card-content>-->
+<!--      <ion-list>-->
+<!--        <ion-list-header>Followed Teams:</ion-list-header>-->
+<!--        <ion-item *ngFor="let item of saved" (click)="savedTapped(item)">-->
+<!--          <ion-icon name="star"></ion-icon>&nbsp;-->
+<!--&lt;!&ndash;          <p>{{ item.team.name }} - {{ item.tournamentName }}</p>&ndash;&gt;-->
+<!--        </ion-item>-->
+<!--      </ion-list>-->
+<!--      <p>To add more to your watchlist, select a movie, then you can add them to your list.</p>-->
+<!--      <ion-button shape="round" color="primary" expand="full" (click)="goToMovies()">-->
+<!--        <ion-icon name="search"></ion-icon>&nbsp;Find a Movie-->
+<!--      </ion-button>-->
+<!--    </ion-card-content>-->
+<!--  </ion-card>-->
 </ion-content>

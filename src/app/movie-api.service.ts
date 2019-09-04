@@ -15,4 +15,8 @@ export class MovieApiService {
   getMovieData(): Observable<Movies[]> {
     return this.http.get<Movies[]>(environment.movieDataUrl);
   }
+
+  getPopularMovies(): Observable<Movies[]> {
+    return this.http.get<Movies[]>(environment.movieCollectionUrl);
+  }
 }

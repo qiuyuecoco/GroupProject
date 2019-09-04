@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {LoadingController, NavController} from '@ionic/angular';
 import {ActivatedRoute} from '@angular/router';
+import {Movies} from '../model/movies';
+import {MovieApiService} from '../movie-api.service';
 
 @Component({
   selector: 'app-movies-list',
@@ -24,13 +26,13 @@ export class MoviesListPage implements OnInit {
     loading.present().then(() => {
       const selectedMovieId = this.route.snapshot.paramMap.get('id');
       // TODO: getMovieData needs to match API function
-      this.movieApiService.getMovieData(selectedMovieId).subscribe(data => {
-        this.movies = data.movies;
+      // this.movieApiService.getMovieData(selectedMovieId).subscribe(data => {
+      //   this.movies = data.movies;
 
-        console.log('movies: ', this.movies);
-        console.log(data, this.movies);
-        loading.dismiss();
+        // console.log('movies: ', this.movies);
+        // console.log(data, this.movies);
+        // loading.dismiss();
       });
-    });
+    // });
   }
 }

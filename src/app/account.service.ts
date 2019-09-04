@@ -10,7 +10,7 @@ firebase.initializeApp(  {
   messagingSenderId: '538019533720',
   appId: '1:538019533720:web:fe98a59e19674c74'
 });
-
+const db = firebase.firestore();
 @Injectable({
   providedIn: 'root'
 })
@@ -20,15 +20,8 @@ export class AccountService {
   login() {
     firebase.auth().signInWithPopup(this.provider).then(r => {
       firebase.auth().getRedirectResult().then((result) => {
-        if (result.credential) {
-          // This gives you a Google Access Token. You can use it to access the Google API.
-          // @ts-ignore
-          const token = result.credential.accessToken;
-          console.log(token);
-          // ...
-        }
         // The signed-in user info.
-        const user = result.user;
+        this.createUserDocument();
       }).catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;
@@ -40,14 +33,39 @@ export class AccountService {
         // ...
       });
     });
-    this.isLoggedIn();
   }
   isLoggedIn() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        document.location.href = '/home';
+        console.log(user);
       } else {
+        console.log('not logged in.');
       }
     });
+  }
+  createUserDocument() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        const docRef = db.collection('ACCOUNTS').doc(user.uid);
+        docRef.get().then((docSnapshot) => {
+          if (docSnapshot.exists) {
+            docRef.onSnapshot((doc) => {
+            });
+          } else {
+            docRef.set({
+              watchlist: [],
+              history: [],
+            }).then(() => {
+              console.log(`Document Successfully Written.`);
+            }).catch((error) => {
+              console.log(`Error Writing Document: ${error}`);
+            });
+          }
+        });
+      } else {
+        console.log('not logged in.');
+      }
+    });
+
   }
 }

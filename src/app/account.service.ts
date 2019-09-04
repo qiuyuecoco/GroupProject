@@ -69,8 +69,11 @@ export class AccountService {
             });
           } else {
             docRef.set({
+              user_email: user.email,
+              user_name: user.displayName,
               watchlist: [],
               history: [],
+              user_data: user
             }).then(() => {
               console.log(`Document Successfully Written.`);
             }).catch((error) => {

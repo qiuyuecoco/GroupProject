@@ -45,10 +45,12 @@ export class AppComponent {
     private statusBar: StatusBar,
     public accountService: AccountService,
   ) {
+    this.accountService.accountLogin();
     this.initializeApp();
   }
 
   initializeApp() {
+    this.accountService.accountLogin();
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();

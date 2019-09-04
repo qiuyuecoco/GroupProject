@@ -9,9 +9,9 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class MoviesListPage implements OnInit {
 
-  private movies: Movies[];
+  // private movies: Movies[];
   constructor(
-      private movieApiService: MovieApiService,
+      // private movieApiService: MovieApiService,
       private loader: LoadingController,
       private navCrtl: NavController,
       private route: ActivatedRoute,
@@ -24,13 +24,13 @@ export class MoviesListPage implements OnInit {
     loading.present().then(() => {
       const selectedMovieId = this.route.snapshot.paramMap.get('id');
       // TODO: getMovieData needs to match API function
-      this.movieApiService.getMovieData(selectedMovieId).subscribe(data => {
-        this.movies = data.movies;
-
-        console.log('movies: ', this.movies);
-        console.log(data, this.movies);
-        loading.dismiss();
-      });
+      // this.movieApiService.getMovieData(selectedMovieId).subscribe(data => {
+      //   this.movies = data.movies;
+      //
+      //   console.log('movies: ', this.movies);
+      //   console.log(data, this.movies);
+      //   loading.dismiss();
+      // });
     });
   }
 }

@@ -89,7 +89,6 @@ export class AccountService {
   accountLogin() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        // console.log(user);
         this.loadedUser = user;
       } else {
         this.router.navigate(['/login']);

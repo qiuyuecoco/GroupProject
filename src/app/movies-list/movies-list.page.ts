@@ -25,7 +25,7 @@ export class MoviesListPage implements OnInit {
     });
     loading.present().then(() => {
       // const selectedMovieId = this.route.snapshot.paramMap.get('id');
-      this.movieApiService.getMovieData().subscribe(imageData => {
+      this.movieApiService.getTopRatedMovies().subscribe(imageData => {
         this.movies = imageData;
       });
       this.movieApiService.getTopRatedMovies().subscribe(data => {

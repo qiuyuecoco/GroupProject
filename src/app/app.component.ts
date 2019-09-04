@@ -25,6 +25,11 @@ export class AppComponent {
       title: 'Login',
       url: '/login',
       icon: 'list'
+    },
+    {
+      title: 'Popular',
+      url: '/movie-details',
+      icon: 'list'
     }
   ];
 

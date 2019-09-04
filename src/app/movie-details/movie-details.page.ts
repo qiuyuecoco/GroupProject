@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {MovieApiService} from '../movie-api.service';
-import {Movie} from '../model/movie';
 import {Movies} from '../model/movies';
 
 @Component({
@@ -10,15 +9,14 @@ import {Movies} from '../model/movies';
 })
 export class MovieDetailsPage implements OnInit {
   private movies: Movies[];
+  private popularMovies: Movies[];
 
   constructor(private movieApiService: MovieApiService) { }
 
   ngOnInit() {
-    this.movieApiService.getMovieData().subscribe(data => {
+    this.movieApiService.getPopularMovies().subscribe(data => {
+      this.popularMovies = data;
       console.log(data);
-      this.movies = data;
-    }
-    );
+    });
   }
-
 }

@@ -26,10 +26,20 @@ export class AppComponent {
       url: '/list',
       icon: 'list'
     },
+      {
+          title: 'Account',
+          url: '/account',
+          icon: 'contact'
+      },
+      {
+      title: 'Login',
+      url: '/login',
+      icon: 'list'
+    },
     {
-      title: 'Account',
-      url: '/account',
-      icon: 'contact'
+      title: 'Popular',
+      url: '/movie-details',
+      icon: 'list'
     }
   ];
 

@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header (loadeddata)="accountService.isLoggedIn();" (load)="accountService.isLoggedIn();" (loadstart)="accountService.isLoggedIn();" (loadedmetadata)="accountService.isLoggedIn();">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
@@ -14,7 +14,7 @@
     </ion-card-header>
 
     <ion-card-content>
-      <ion-button (click)="accountService.login();">LOGIN WITH GOOGLE</ion-button>
+      <ion-button (click)="accountService.login();"><img src="../../assets/icon/Google.png" style="height: 20px; width: 20px; margin-right: 5px; padding: 0;">  LOGIN WITH GOOGLE</ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>

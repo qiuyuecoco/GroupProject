@@ -17,6 +17,11 @@ export class AppComponent {
       icon: 'home'
     },
     {
+      title: 'Top Rated',
+      url: '/movies-list',
+      icon: 'star'
+    },
+    {
       title: 'List',
       url: '/list',
       icon: 'list'
@@ -24,7 +29,7 @@ export class AppComponent {
     {
       title: 'Login',
       url: '/login',
-      icon: 'list'
+      icon: 'log-in'
     }
   ];
 

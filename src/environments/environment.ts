@@ -4,6 +4,8 @@
 
 export const environment = {
   production: false,
+  movieCollectionUrl: 'https://api.themoviedb.org/3/movie/popular?api_key=4eb5c031eab630e105a371a7a7c4488e',
+  movieDataUrl: 'https://api.themoviedb.org/3/movie/76341?api_key=4eb5c031eab630e105a371a7a7c4488e',
   firebase: {
     apiKey: 'AIzaSyBzxRLUs8ZMvV53CKhfpNHilXii_puTapk',
     authDomain: 'ionic-group-project.firebaseapp.com',

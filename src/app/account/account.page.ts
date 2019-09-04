@@ -11,7 +11,6 @@ export class AccountPage implements OnInit {
   constructor(private accountService: AccountService) { }
 
   ngOnInit() {
-    this.accountService.accountLogin();
   }
 
 }

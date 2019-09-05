@@ -11,6 +11,7 @@ import {MovieApiService} from '../movie-api.service';
 export class MoviesListPage implements OnInit {
 
   private movies: Movies[];
+
   constructor(
       private movieApiService: MovieApiService,
       private loader: LoadingController,

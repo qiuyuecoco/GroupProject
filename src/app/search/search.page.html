@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <div style="display: flex; flex-direction: row; justify-content: left; justify-items: left; margin-left: 0;">
+      <ion-title>Search</ion-title>
+      <ion-item style="width: 100%; margin-right: 10px; padding: 1px;"><ion-input placeholder="Movie Title" style="padding: 1px;" id="searchBar" (ionInput)="searchByName();" (ionChange)="searchByName()"></ion-input></ion-item>
+    </div>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-card *ngFor="let movie of filtered; let i = index">
+  <ion-card-title>
+    {{filtered[i]}}
+  </ion-card-title>
+</ion-card>
+</ion-content>
+

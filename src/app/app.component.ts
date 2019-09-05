@@ -24,7 +24,7 @@ export class AppComponent {
     },
     {
       title: 'Popular',
-      url: '/movie-details',
+      url: '/popular',
       icon: 'list'
     },
     {

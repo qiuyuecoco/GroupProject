@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Popular Movies</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="popularMovies" style="max-width: 150px">
+    <ion-list *ngFor="let movie of popularMovies.results" (click)="movieClicked(movie)">
+      <ion-item>{{ movie.original_title }}</ion-item>
+      <ion-img src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}"></ion-img>
+    </ion-list>
+  </ion-card>
+<!--  <ion-card *ngIf="popularMovies" >-->
+<!--    <ion-card-content *ngFor="let movie of popularMovies.results">-->
+<!--      <ion-card-header> {{ movie.original_title }} </ion-card-header>-->
+<!--      <ion-list>-->
+<!--        <ion-item>-->
+<!--          <ion-grid>-->
+<!--            <ion-row>-->
+<!--              <ion-col>-->
+<!--                <img src="https://image.tmdb.org/t/p/w500{{ movie.backdrop_path }}">-->
+
+<!--              </ion-col>-->
+<!--              <ion-col>-->
+<!--                <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}">-->
+
+<!--              </ion-col>-->
+
+<!--              <ion-col>-->
+<!--                <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}">-->
+
+<!--              </ion-col>-->
+<!--            </ion-row>-->
+<!--          </ion-grid>-->
+<!--        </ion-item>-->
+<!--      </ion-list>-->
+<!--    </ion-card-content>-->
+<!--  </ion-card>-->
+</ion-content>

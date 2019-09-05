@@ -14,6 +14,8 @@ export class MovieApiService {
   movie: Movie;
   selectedMovie: Movie;
 
+  private movies: Movies[];
+
   constructor(private http: HttpClient) { }
 
   dynamicMovieTypes(action, type): Observable<any> {
@@ -25,10 +27,7 @@ export class MovieApiService {
     // tslint:disable-next-line:max-line-length
     const url = `https://api.themoviedb.org/3/search/${type}?api_key=4eb5c031eab630e105a371a7a7c4488e${query}${language}&page=1&include_adult=false&`;
     return this.http.get(url).pipe(map(data => data));
-// TODO: add to search functionality:
-// const type = 'movie';
-// const language = '&language=en-US';
-// const query = '&query=${searchValue}';
+
   }
 
   getPopularMovies(): Observable<Movies[]> {

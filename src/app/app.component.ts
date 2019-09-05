@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import {AccountService} from './account.service';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,11 @@ export class AppComponent {
       icon: 'star'
     },
     {
+      title: 'Popular',
+      url: '/movie-details',
+      icon: 'list'
+    },
+    {
       title: 'List',
       url: '/list',
       icon: 'list'
@@ -36,12 +42,15 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    public accountService: AccountService,
   ) {
+    this.accountService.accountLogin();
     this.initializeApp();
   }
 
   initializeApp() {
+    this.accountService.accountLogin();
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();

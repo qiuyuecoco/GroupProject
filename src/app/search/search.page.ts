@@ -16,12 +16,12 @@ export class SearchPage implements OnInit {
 
   searchByName() {
     // @ts-ignore
-    const Query = document.getElementById('searchBar').value;
+    const Query = document.getElementById('searchBar').value.toLowerCase();
     this.filtered = [];
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.movies.length; i++) {
       console.log(this.movies[i]);
-      if (this.movies[i].includes(Query)) {
+      if (this.movies[i].toLowerCase().includes(Query)) {
         this.filtered.push(this.movies[i]);
       } else {
         if (Query === '') {

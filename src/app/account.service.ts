@@ -1,16 +1,9 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import {Router} from '@angular/router';
+import {environment} from '../environments/environment';
 
-firebase.initializeApp(  {
-  apiKey: 'AIzaSyBzxRLUs8ZMvV53CKhfpNHilXii_puTapk',
-  authDomain: 'ionic-group-project.firebaseapp.com',
-  databaseURL: 'https://ionic-group-project.firebaseio.com',
-  projectId: 'ionic-group-project',
-  storageBucket: 'ionic-group-project.appspot.com',
-  messagingSenderId: '538019533720',
-  appId: '1:538019533720:web:fe98a59e19674c74'
-});
+firebase.initializeApp(environment.firebase);
 const db = firebase.firestore();
 @Injectable({
   providedIn: 'root'
@@ -61,6 +54,7 @@ export class AccountService {
   createUserDocument() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
+        console.log(user);
         this.loadedUser = user;
         const docRef = db.collection('ACCOUNTS').doc(user.uid);
         docRef.get().then((docSnapshot) => {
@@ -68,12 +62,11 @@ export class AccountService {
             docRef.onSnapshot((doc) => {
             });
           } else {
-            docRef.set({
-              user_email: user.email,
-              user_name: user.displayName,
+            db.collection('ACCOUNTS').doc(user.uid).set({
               watchlist: [],
               history: [],
-              user_data: user
+              email: user.email,
+              name: user.displayName
             }).then(() => {
               console.log(`Document Successfully Written.`);
             }).catch((error) => {

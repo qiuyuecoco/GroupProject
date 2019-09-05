@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {LoadingController, NavController} from '@ionic/angular';
-import {ActivatedRoute} from '@angular/router';
+import {LoadingController} from '@ionic/angular';
 import {Movies} from '../model/movies';
 import {MovieApiService} from '../movie-api.service';
 
@@ -23,9 +22,7 @@ export class MoviesListPage implements OnInit {
     });
     const type = 'top_rated';
     const action = 'movie';
-// const language = '&language=en-US';
     loading.present().then(() => {
-      // const selectedMovieId = this.route.snapshot.paramMap.get('id');
       this.movieApiService.dynamicMovieTypes(action, type).subscribe(data => {
         this.movies = data;
         console.log(data, this.movies);

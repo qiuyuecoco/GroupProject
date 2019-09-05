@@ -25,12 +25,17 @@ export class AppComponent {
     {
       title: 'Popular',
       url: '/popular',
+      icon: 'heart'
+    },
+    {
+      title: 'Watch List',
+      url: '/list',
       icon: 'list'
     },
     {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
+      title: 'Search',
+      url: '/search',
+      icon: 'help'
     },
     {
       title: 'Account',

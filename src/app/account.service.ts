@@ -61,6 +61,7 @@ export class AccountService {
   createUserDocument() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
+        console.log(user);
         this.loadedUser = user;
         const docRef = db.collection('ACCOUNTS').doc(user.uid);
         docRef.get().then((docSnapshot) => {
@@ -68,12 +69,11 @@ export class AccountService {
             docRef.onSnapshot((doc) => {
             });
           } else {
-            docRef.set({
-              user_email: user.email,
-              user_name: user.displayName,
+            db.collection('ACCOUNTS').doc(user.uid).set({
               watchlist: [],
               history: [],
-              user_data: user
+              email: user.email,
+              name: user.displayName
             }).then(() => {
               console.log(`Document Successfully Written.`);
             }).catch((error) => {

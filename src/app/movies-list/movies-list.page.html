@@ -7,13 +7,38 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content style="display: flex; justify-content: center; flex-direction: row">
-<!--  <ion-card *ngFor="let movie of movies">-->
-  <ion-card *ngIf="movies" style="max-width: 150px">
-    <ion-list *ngFor="let movie of movies.results">
-      <ion-item> {{ movie.original_title }} </ion-item>
-            <ion-img src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}" ></ion-img>
-    </ion-list>
+<ion-content>
+  <ion-card *ngIf="movies">
+    <ion-card-content>
+      <ion-card-header>Results: {{movies.total_results}}</ion-card-header>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="movies" >
+    <ion-card-content *ngFor="let movie of movies.results">
+      <ion-card-header> {{ movie.original_title }} </ion-card-header>
+      <ion-list>
+        <ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <img src="https://image.tmdb.org/t/p/w500{{ movie.backdrop_path }}">
+
+              </ion-col>
+              <ion-col>
+                <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}">
+
+              </ion-col>
+
+              <ion-col>
+                <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}">
+
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
   </ion-card>
 
 

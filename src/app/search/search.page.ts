@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {MovieApiService} from '../movie-api.service';
 import {Observable} from 'rxjs';
+import {NavController} from "@ionic/angular";
+import {Movie} from "../model/movie";
 
 @Component({
   selector: 'app-search',
@@ -28,7 +30,11 @@ export class SearchPage implements OnInit {
   };
   MoviesList: any = [];
   filtered: any[] = [];
-  constructor(private movieAPI: MovieApiService) { }
+  constructor(
+      private movieAPI: MovieApiService,
+      private movieApiService: MovieApiService,
+      private navCtrl: NavController,
+  ) { }
 
   ngOnInit() {
     this.getMovie();
@@ -125,5 +131,9 @@ export class SearchPage implements OnInit {
         .map(id => {
           return this.MoviesList.find(a => a.id === id);
         });
+  }
+  movieClicked(movie: Movie) {
+    this.movieApiService.movie = movie;
+    this.navCtrl.navigateForward('movie-details');
   }
 }

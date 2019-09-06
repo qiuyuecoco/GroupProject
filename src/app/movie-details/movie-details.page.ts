@@ -10,6 +10,7 @@ import {Movie} from '../model/movie';
 })
 export class MovieDetailsPage implements OnInit {
   private movie: Movie;
+  voteCount: number;
 
   get movieId(): number {
     return this.movieApiService.movie.id;
@@ -21,11 +22,16 @@ export class MovieDetailsPage implements OnInit {
     const selectedMovieId = this.movieId;
     this.movieApiService.getMovieById(selectedMovieId).subscribe(movie => {
       this.movie = movie;
+      this.voteCount = movie.vote_count;
       console.log(this.movie);
     });
   }
 
-  segmentChanged(event: any) {
-    console.log('Segment changed', event);
+  addVote() {
+    this.voteCount += 1;
   }
+
+  // segmentChanged(event: any) {
+  //   console.log('Segment changed', event);
+  // }
 }

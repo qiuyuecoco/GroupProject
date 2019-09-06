@@ -21,6 +21,10 @@ const routes: Routes = [
   { path: 'search', loadChildren: './search/search.module#SearchPageModule' },
   { path: 'account', loadChildren: './account/account.module#AccountPageModule' },
   { path: 'popular', loadChildren: './movies-list/popular/popular.module#PopularPageModule' },
+  { path: 'upcoming', loadChildren: './movies-list/upcoming/upcoming.module#UpcomingPageModule' },
+  { path: 'now-playing', loadChildren: './movies-list/now-playing/now-playing.module#NowPlayingPageModule' },
+  { path: 'latest', loadChildren: './movies-list/latest/latest.module#LatestPageModule' },
+  { path: 'top-rated', loadChildren: './movies-list/top-rated/top-rated.module#TopRatedPageModule' },
 ];
 
 @NgModule({

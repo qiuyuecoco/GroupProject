@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>The latest movie:</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="!latestType">
+    <ion-card-content>
+      <ion-card-header>None available, try at another time!</ion-card-header>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="latestType">
+    <ion-card-content>
+      <ion-card-header>Results: {{latestType.title}}</ion-card-header>
+      <ion-card-subtitle>Status: {{latestType.status}}</ion-card-subtitle>
+      <ion-card-title>Movie ID: {{latestType.id}}</ion-card-title>
+      <ion-item>
+
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="latestType" >
+    <ion-card-content>
+      <ion-card-header> {{ latestType.original_title }} </ion-card-header>
+      <ion-list>
+        <ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <img src="https://image.tmdb.org/t/p/w500{{ latestType.poster_path }}">
+              </ion-col>
+              <ion-col>
+                <p> Overview: {{latestType.overview}}</p>
+              </ion-col>
+              <ion-col>
+                <h1> {{ latestType.title }} </h1>
+                <h4> Rating: {{latestType.vote_average}}</h4>
+                <h4> Release Date: {{latestType.release_date}}</h4>
+                <img src="https://image.tmdb.org/t/p/w500{{ latestType.backdrop_path }}">
+                <ion-button (click)="movieClicked(latestType)"> More Details & options</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

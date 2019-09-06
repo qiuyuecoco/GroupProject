@@ -18,19 +18,9 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'Top Rated',
-      url: '/movies-list',
-      icon: 'star'
-    },
-    {
-      title: 'Popular',
-      url: '/popular',
-      icon: 'heart'
-    },
-    {
       title: 'Watch List',
       url: '/list',
-      icon: 'list'
+      icon: 'videocam'
     },
     {
       title: 'Search',

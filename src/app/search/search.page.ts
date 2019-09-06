@@ -26,7 +26,7 @@ export class SearchPage implements OnInit {
       results: []
     }
   };
-  MoviesList = [];
+  MoviesList: any = [];
   filtered: any[] = [];
   constructor(private movieAPI: MovieApiService) { }
 
@@ -63,38 +63,42 @@ export class SearchPage implements OnInit {
   getMovie() {
     this.movieAPI.dynamicMovieTypes('movie', 'upcoming').subscribe(data => {
       this.movies.upcoming = data;
-      console.log(data.results);
+      // console.log(data.results);
       // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < this.movies.upcoming.results.length; i++) {
         this.MoviesList.push(this.movies.upcoming.results[i]);
       }
+      this.removeDupes();
     });
     this.movieAPI.dynamicMovieTypes('movie', 'top_rated').subscribe(data => {
       this.movies.top_rated = data;
-      console.log(data.results);
+      // console.log(data.results);
       // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < this.movies.top_rated.results.length; i++) {
         this.MoviesList.push(this.movies.top_rated.results[i]);
       }
+      this.removeDupes();
     });
     this.movieAPI.dynamicMovieTypes('movie', 'popular').subscribe(data => {
       this.movies.popular = data;
-      console.log(data.results);
+      // console.log(data.results);
       // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < this.movies.popular.results.length; i++) {
         this.MoviesList.push(this.movies.popular.results[i]);
       }
+      this.removeDupes();
     });
     this.movieAPI.dynamicMovieTypes('movie', 'now_playing').subscribe(data => {
       this.movies.now_playing = data;
-      console.log(data.results);
+      // console.log(data.results);
       // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < this.movies.now_playing.results.length; i++) {
         this.MoviesList.push(this.movies.now_playing.results[i]);
       }
-      // this.filtered = this.MoviesList;
-      this.MoviesList.filter((item, index) => this.MoviesList.indexOf(item) === index);
+      this.removeDupes();
+      this.filtered = this.MoviesList;
       this.SortAlphabetically();
+
     });
     // this.movieAPI.dynamicMovieTypes('movie', 'latest').subscribe(data => {
     //   this.movies.latest = data;
@@ -113,7 +117,13 @@ export class SearchPage implements OnInit {
       if (a.title > b.title) { return 1; }
       return 0;
     });
-    this.searchByName();
     console.log(this.MoviesList);
+    this.searchByName();
+  }
+  removeDupes() {
+    this.MoviesList = Array.from(new Set(this.MoviesList.map(a => a.id)))
+        .map(id => {
+          return this.MoviesList.find(a => a.id === id);
+        });
   }
 }

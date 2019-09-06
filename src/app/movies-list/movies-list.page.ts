@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {LoadingController} from '@ionic/angular';
+import {LoadingController, NavController} from '@ionic/angular';
 import {Movies} from '../model/movies';
 import {MovieApiService} from '../movie-api.service';
+import {Movie} from '../model/movie';
 
 @Component({
   selector: 'app-movies-list',
@@ -15,6 +16,7 @@ export class MoviesListPage implements OnInit {
   constructor(
       private movieApiService: MovieApiService,
       private loader: LoadingController,
+      private navCtrl: NavController,
   ) { }
 
   async ngOnInit() {
@@ -30,5 +32,10 @@ export class MoviesListPage implements OnInit {
         loading.dismiss();
       });
     });
+  }
+
+  movieClicked(movie: Movie) {
+    this.movieApiService.movie = movie;
+    this.navCtrl.navigateForward('movie-details');
   }
 }

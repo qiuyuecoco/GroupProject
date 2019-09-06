@@ -15,8 +15,13 @@ export class MovieApiService {
   selectedMovie: Movie;
 
   private movies: Movies[];
+  private baseURL = 'https://api.themoviedb.org/3';
 
   constructor(private http: HttpClient) { }
+
+  getMovieTypes(type): Observable<any> {
+    return this.http.get(`${this.baseURL}/movie${type}?api_key=4eb5c031eab630e105a371a7a7c4488e`);
+  }
 
   dynamicMovieTypes(action, type): Observable<any> {
     const url = `https://api.themoviedb.org/3/${action}/${type}?api_key=4eb5c031eab630e105a371a7a7c4488e`;

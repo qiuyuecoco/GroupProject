@@ -9,26 +9,78 @@
 
 <ion-content *ngIf="movie">
   <ion-card>
+    <ion-card-content style="display: flex; justify-content: center; align-items: center; flex-direction: column">
+      <ion-card-title style="text-align: center">{{ movie.title }}</ion-card-title>
+      <ion-img style="max-width: 350px;" src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}"></ion-img>
+    </ion-card-content>
     <ion-card-content>
-      <ion-card-title style="text-align: center">{{ movie.original_title }}</ion-card-title>
-      <ion-img style="max-width: 300px" src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}"></ion-img>
+      <ion-card-title>Description:</ion-card-title>
       <ion-card-subtitle>{{ movie.overview }}</ion-card-subtitle>
-      <ion-list>
-        <ion-item>{{ movie.release_date }}</ion-item>
-        <ion-item>{{ movie.status }}</ion-item>
-        <ion-item>{{ movie.tagline }}</ion-item>
-        <ion-item>{{ movie.homepage }}</ion-item>
-        <ion-item>{{ movie.runtime }}</ion-item>
-        <ion-list *ngFor="let genre of movie.genres">
-          <ion-item>{{ genre.name }}</ion-item>
-        </ion-list>
-      </ion-list>
-      <ion-segment (ionChange)="segmentChanged($event)">
-        <ion-segment-button value="false">
-          <ion-icon name="heart"></ion-icon>
-          <ion-label>Watched</ion-label>
-        </ion-segment-button>
-      </ion-segment>
+    </ion-card-content>
+    <ion-card-content>
+      <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-card-title>Movie TagLine</ion-card-title>
+        </ion-col>
+        <ion-col>{{ movie.tagline }}</ion-col>
+        <ion-col>
+          <ion-card-title>Release Date</ion-card-title>
+        </ion-col>
+        <ion-col>{{ movie.release_date }}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-card-title>Genres</ion-card-title>
+        </ion-col>
+        <ion-col>
+          <ion-col *ngFor="let genre of movie.genres">{{ genre.name }}</ion-col>
+        </ion-col>
+        <ion-col>
+          <ion-card-title>Release Status</ion-card-title>
+        </ion-col>
+        <ion-col>{{ movie.status }}</ion-col>
+      </ion-row>
+      <ion-row>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-card-title>Homepage</ion-card-title>
+        </ion-col>
+        <ion-col>{{ movie.homepage }}</ion-col>
+        <ion-col>
+          <ion-card-title>Runtime</ion-card-title>
+        </ion-col>
+        <ion-col>{{ movie.runtime }}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-card-title>Rating</ion-card-title>
+        </ion-col>
+        <ion-col>{{ movie.vote_average }}</ion-col>
+        <ion-col>
+          <ion-card-title>Votes</ion-card-title>
+        </ion-col>
+        <ion-col>{{ voteCount }}</ion-col>
+      </ion-row>
+      </ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="addVote()">Vote</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="addToWatchList(movie)">Add To WatchList</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button>Seen It</ion-button>
+        </ion-col>
+      </ion-row>
+<!--      <ion-segment (ionChange)="segmentChanged($event)">-->
+<!--        <ion-segment-button value="false">-->
+<!--          <ion-icon name="heart"></ion-icon>-->
+<!--          <ion-label>Watched</ion-label>-->
+<!--        </ion-segment-button>-->
+<!--      </ion-segment>-->
     </ion-card-content>
   </ion-card>
 </ion-content>

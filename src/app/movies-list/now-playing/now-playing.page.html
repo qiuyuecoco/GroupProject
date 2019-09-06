@@ -3,19 +3,19 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Popular Movies</ion-title>
+    <ion-title>Now Playing Movies</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card *ngIf="popularMovies">
+  <ion-card *ngIf="nowPlaying">
     <ion-card-content>
-      <ion-card-header>Results: {{popularMovies.total_results}}</ion-card-header>
+      <ion-card-header>Results: {{nowPlaying.total_results}}</ion-card-header>
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="popularMovies" >
-    <ion-card-content *ngFor="let movie of popularMovies.results">
+  <ion-card *ngIf="nowPlaying" >
+    <ion-card-content *ngFor="let movie of nowPlaying.results">
       <ion-card-header> {{ movie.original_title }} </ion-card-header>
       <ion-list>
         <ion-item>
@@ -40,10 +40,4 @@
       </ion-list>
     </ion-card-content>
   </ion-card>
-<!--  <ion-card *ngIf="popularMovies" style="max-width: 150px">-->
-<!--    <ion-list *ngFor="let movie of popularMovies.results" (click)="movieClicked(movie)">-->
-<!--      <ion-item>{{ movie.original_title }}</ion-item>-->
-<!--      <ion-img src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}"></ion-img>-->
-<!--    </ion-list>-->
-<!--  </ion-card>-->
 </ion-content>

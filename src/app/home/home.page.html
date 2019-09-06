@@ -3,9 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>
-      Movie Categories
-    </ion-title>
+    <ion-title>Welcome to Movies!</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,40 +11,36 @@
     <ion-card class="welcome-card">
       <img src="/assets/icon/popcorn-film-cinema.png" alt="popcorn film cinema background image" />
       <ion-card-header>
-<!--        <ion-card-subtitle>Get Started</ion-card-subtitle>-->
-        <ion-card-title>Welcome to Movies</ion-card-title>
+        <ion-card-subtitle>Get Started</ion-card-subtitle>
+<!--        <ion-card-title>Find selection by category</ion-card-title>-->
       </ion-card-header>
       <ion-card-content>
         <p>Find you next entertainment option with ease! Select a category below & add items to your favorites or watch list!</p>
       </ion-card-content>
     </ion-card>
+    <ion-list *ngIf="allTypes">
+      <ion-list-header>
+        <ion-title>Popular Categories:</ion-title>
+      </ion-list-header>
+      <ion-item *ngFor="let category of allTypes" (click)="categoryTapped(category)">
+        <ion-icon slot="start" color="medium" name="{{category.icon}}"></ion-icon>
+        <ion-label>{{ category.text }}</ion-label>
+      </ion-item>
+    </ion-list>
+</ion-content>
 
-  <ion-card *ngIf="allTypes">
-    <!--    <ion-card-header>Followed Teams</ion-card-header>-->
-    <ion-card-content>
-      <ion-list>
-        <ion-list-header>Popular Categories:</ion-list-header>
-        <ion-item *ngFor="let category of allTypes" (click)="categoryTapped(category)">
-          <ion-icon name="{{category.icon}}"></ion-icon>&nbsp;
-          <p>{{ category.text }}</p>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
-
-<!--  TODO: Implement below; w/o ion-card-->
-<!--    <ion-list lines="none">-->
-<!--      <ion-list-header>-->
-<!--        <ion-title>Popular Categories:</ion-title>-->
-<!--      </ion-list-header>-->
-<!--      <ion-item href="https://api.themoviedb.org/3/movie/top_rated?api_key=4eb5c031eab630e105a371a7a7c4488e">-->
-<!--        <ion-icon slot="start" color="medium" name="heart"></ion-icon>-->
-<!--        <ion-label>Top Rated</ion-label>-->
-<!--      </ion-item>-->
-<!--    </ion-list>-->
-<!--</ion-content>-->
-
-
+<!--<ion-card *ngIf="allTypes">-->
+<!--    &lt;!&ndash;    <ion-card-header>Followed Teams</ion-card-header>&ndash;&gt;-->
+<!--    <ion-card-content>-->
+<!--        <ion-list>-->
+<!--            <ion-list-header>Popular Categories:</ion-list-header>-->
+<!--            <ion-item *ngFor="let category of allTypes" (click)="categoryTapped(category)">-->
+<!--                <ion-icon name="{{category.icon}}"></ion-icon>&nbsp;-->
+<!--                <p>{{ category.text }}</p>-->
+<!--            </ion-item>-->
+<!--        </ion-list>-->
+<!--    </ion-card-content>-->
+<!--</ion-card>-->
 
 <!--original layout-->
 <!--<ion-item href="https://ionicframework.com/docs/">-->

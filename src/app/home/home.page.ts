@@ -12,11 +12,12 @@ import {MovieApiService} from '../movie-api.service';
 })
 export class HomePage {
   public allTypes = [
-    {typeId: 1, routeUrl: 'category-upcoming', value: '/upcoming', text: 'Upcoming', icon: 'star'},
-    {typeId: 2, routeUrl: 'movies-list', value: '/top_rated', text: 'Top Rated', icon: 'heart'},
-    {typeId: 3, routeUrl: 'category-popular', value: '/popular', text: 'Popular', icon: 'contact'},
-    {typeId: 4, routeUrl: 'category-nowPlaying', value: '/now_playing', text: 'Now Playing', icon: 'heart'},
-    {typeId: 5, routeUrl: 'category-latest', value: '/latest', text: 'Latest', icon: 'list'},
+    {typeId: 1, routeUrl: 'upcoming', value: '/upcoming', text: 'Upcoming', icon: 'star'},
+      // TODO: update below route movies-list => top-rated
+    {typeId: 2, routeUrl: 'movies-list', value: '/top_rated', text: 'Top Rated', icon: 'trophy'},
+    {typeId: 3, routeUrl: 'popular', value: '/popular', text: 'Popular', icon: 'analytics'},
+    {typeId: 4, routeUrl: 'now-playing', value: '/now_playing', text: 'Now Playing', icon: 'film'},
+    {typeId: 5, routeUrl: 'latest', value: '/latest', text: 'Latest', icon: 'bookmark'},
   ];
 
   get movieId(): string {

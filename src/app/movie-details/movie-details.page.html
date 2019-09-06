@@ -3,15 +3,32 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Popular Movies List</ion-title>
+    <ion-title>Movie Details</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content style="display: flex; justify-content: center; flex-direction: row">
-  <ion-card *ngIf="popularMovies" style="max-width: 150px">
-    <ion-list *ngFor="let movies of popularMovies.results">
-      <ion-item>{{ movies.original_title }}</ion-item>
-      <ion-img src="https://image.tmdb.org/t/p/original/{{ movies.poster_path }}"></ion-img>
-    </ion-list>
+<ion-content *ngIf="movie">
+  <ion-card>
+    <ion-card-content>
+      <ion-card-title style="text-align: center">{{ movie.original_title }}</ion-card-title>
+      <ion-img style="max-width: 300px" src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}"></ion-img>
+      <ion-card-subtitle>{{ movie.overview }}</ion-card-subtitle>
+      <ion-list>
+        <ion-item>{{ movie.release_date }}</ion-item>
+        <ion-item>{{ movie.status }}</ion-item>
+        <ion-item>{{ movie.tagline }}</ion-item>
+        <ion-item>{{ movie.homepage }}</ion-item>
+        <ion-item>{{ movie.runtime }}</ion-item>
+        <ion-list *ngFor="let genre of movie.genres">
+          <ion-item>{{ genre.name }}</ion-item>
+        </ion-list>
+      </ion-list>
+      <ion-segment (ionChange)="segmentChanged($event)">
+        <ion-segment-button value="false">
+          <ion-icon name="heart"></ion-icon>
+          <ion-label>Watched</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-card-content>
   </ion-card>
 </ion-content>

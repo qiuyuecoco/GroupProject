@@ -14,7 +14,37 @@ import { ListPage } from './list.page';
     RouterModule.forChild([
       {
         path: '',
-        component: ListPage
+        component: ListPage,
+        children: [
+          {
+            path: 'watch-list',
+            children: [
+              {
+                path: '',
+                loadChildren: './watch-list/watch-list.module#WatchListPageModule'
+              }
+            ]
+          },
+          {
+            path: 'watched-list',
+            children: [
+              {
+                path: '',
+                loadChildren: './watched-list/watched-list.module#WatchedListPageModule'
+              }
+            ]
+          },
+          {
+            path: '',
+            redirectTo: '/list/watch-list',
+            pathMatch: 'full'
+          }
+        ]
+      },
+      {
+        path: '',
+        redirectTo: '/list/watch-list',
+        pathMatch: 'full'
       }
     ])
   ],

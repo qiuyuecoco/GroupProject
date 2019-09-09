@@ -27,11 +27,13 @@ export class MovieDetailsPage implements OnInit {
     });
   }
 
+  addToWatchlist() {
+    const selectedMovie = this.movieId;
+    this.movieApiService.watchList.push(selectedMovie);
+    console.log(this.movieApiService.watchList);
+  }
+
   addVote() {
     this.voteCount += 1;
   }
-
-  // segmentChanged(event: any) {
-  //   console.log('Segment changed', event);
-  // }
 }

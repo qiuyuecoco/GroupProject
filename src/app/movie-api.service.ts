@@ -13,6 +13,7 @@ import {map} from 'rxjs/operators';
 export class MovieApiService {
   movie: Movie;
   selectedMovie: Movie;
+  watchList = [];
 
   private movies: Movies[];
   private baseURL = 'https://api.themoviedb.org/3';

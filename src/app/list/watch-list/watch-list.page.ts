@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MovieApiService} from '../../movie-api.service';
 
 @Component({
   selector: 'app-watch-list',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./watch-list.page.scss'],
 })
 export class WatchListPage implements OnInit {
+  private watchList: number[] = [];
 
-  constructor() { }
+  constructor(private movieApiService: MovieApiService) { }
 
   ngOnInit() {
+    this.watchList = this.movieApiService.watchList;
   }
 
 }

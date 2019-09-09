@@ -42,7 +42,8 @@ export class MovieApiService {
     return this.http.get<Movies[]>(environment.movieDataTopRated);
   }
   getMovieById(movieId): Observable<Movie> {
-    return this.http.get<Movie>(`${environment.movieBaseUrl}${movieId}${environment.movieApiKey}`).pipe(map(movie => {
+    return this.http.get<Movie>(`${environment.movieBaseUrl}${movieId}${environment.movieApiKey}`)
+        .pipe(map(movie => {
       this.selectedMovie = movie;
       return this.selectedMovie;
     }));

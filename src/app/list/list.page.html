@@ -4,7 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      List
+      Watch Lists
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -24,4 +24,17 @@
       You navigated here from <b>{{selectedItem.title }}</b>
     </div>
   -->
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="movie-details">
+        <ion-icon name="play"></ion-icon>
+        <ion-label>Watch List</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="standings">
+        <ion-icon name="checkmark-circle-outline"></ion-icon>
+        <ion-label>Watched</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+
 </ion-content>

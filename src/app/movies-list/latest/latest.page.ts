@@ -8,6 +8,7 @@ import {Movie} from '../../model/movie';
   templateUrl: './latest.page.html',
   styleUrls: ['./latest.page.scss'],
 })
+// TODO: DO NOT IMPLEMENT; inappropriate for class/work
 export class LatestPage implements OnInit {
   private latestType: Movie[];
 

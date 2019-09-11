@@ -3,7 +3,7 @@ import {MovieApiService} from '../../movie-api.service';
 import {Movie} from '../../model/movie';
 import {AccountService} from '../../account.service';
 import {User} from '../../model/user';
-import {LoadingController} from '@ionic/angular';
+import {LoadingController, NavController} from '@ionic/angular';
 
 @Component({
   selector: 'app-watch-list',
@@ -19,6 +19,7 @@ export class WatchListPage implements OnInit {
       private movieApiService: MovieApiService,
       private accountService: AccountService,
       private loader: LoadingController,
+      private navCtrl: NavController
       ) {
     this.watchList = this.movieApiService.userData;
   }
@@ -41,5 +42,8 @@ export class WatchListPage implements OnInit {
         loading.dismiss();
     });
   }
-
+  movieClicked(movie: Movie) {
+    this.movieApiService.movie = movie;
+    this.navCtrl.navigateForward('movie-details');
+  }
 }

@@ -6,6 +6,7 @@ import {Movies} from './model/movies';
 import {Movie} from './model/movie';
 import {map} from 'rxjs/operators';
 import {AccountService} from './account.service';
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'

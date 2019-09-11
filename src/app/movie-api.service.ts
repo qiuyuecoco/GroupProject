@@ -5,7 +5,7 @@ import {Observable} from 'rxjs';
 import {Movies} from './model/movies';
 import {Movie} from './model/movie';
 import {map} from 'rxjs/operators';
-
+import {AccountService} from './account.service';
 
 @Injectable({
   providedIn: 'root'

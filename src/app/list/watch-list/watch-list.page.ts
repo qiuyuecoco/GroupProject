@@ -36,7 +36,7 @@ export class WatchListPage implements OnInit {
           this.movieApiService.getMovieById(this.watchList[m]).subscribe(movie => {
             this.movie.push(movie);
             return this.movie;
-        })
+        });
       }
         loading.dismiss();
     });

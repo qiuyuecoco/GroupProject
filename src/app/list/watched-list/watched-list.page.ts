@@ -3,6 +3,8 @@ import {Movies} from '../../model/movies';
 import {MovieApiService} from '../../movie-api.service';
 import {LoadingController, NavController} from '@ionic/angular';
 import {Movie} from '../../model/movie';
+import {User} from '../../model/user';
+import {AccountService} from '../../account.service';
 
 @Component({
   selector: 'app-watched-list',
@@ -11,33 +13,38 @@ import {Movie} from '../../model/movie';
 })
 export class WatchedListPage implements OnInit {
 
-  private watched: number[] = [474350, 920];
-  private watchMovie: Movie;
+  watched: number[] = [];
+  private movie: Movie [] = [];
+  private user: User;
 
-  // get movieById(): number {
-  //   return this.api.movie.id;
-  // }
   constructor(
       private api: MovieApiService,
       private loader: LoadingController,
-      private navCtrl: NavController
+      private navCtrl: NavController,
+      private accountService: AccountService
   ) { }
 
   async ngOnInit() {
+    this.user = this.accountService.loadedUser;
+    this.api.getUserData(this.user);
     const loading = await this.loader.create({
       message: 'Already seen movies...'
     });
-    // for (i = 0; i < this.watched.length; i++) {
-    const selectedMovieId = this.watched;
+    // const selectedMovieId = this.watched;
     loading.present().then(() => {
-      this.api.getMovieById(selectedMovieId).subscribe(data => {
-        this.watchMovie = data;
-        console.log('Movie data: ', data);
-        loading.dismiss();
-      });
+      this.watched = this.api.watchedData;
+      console.log(this.watched);
+      for (let i = 0; i < this.watched.length; i++) {
+        this.api.getMovieById(this.watched[i]).subscribe(data => {
+          this.movie.push(data);
+          return this.movie;
+          console.log('Movie data: ', this.movie);
+        });
+      }
+      loading.dismiss();
     });
-    // }
   }
+
 
   movieClicked(movie: Movie) {
     this.api.movie = movie;

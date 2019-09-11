@@ -17,6 +17,7 @@ export class MovieApiService {
   watchList: number[] = [];
   user: firebase.firestore.CollectionReference;
   userData: number[];
+  watchedData: number[];
   watchedList = [];
 
   private movies: Movies[];
@@ -29,9 +30,9 @@ export class MovieApiService {
     this.user = this.accountService.dB.collection('ACCOUNTS');
   }
 
-  getWatchedMovies(id): Observable<Movie> {
-    return this.http.get(`${this.baseURL}/movie/${id}?api_key=4eb5c031eab630e105a371a7a7c4488e`);
-  }
+  // getWatchedMovies(id): Observable<Movie> {
+  //   return this.http.get(`${this.baseURL}/movie/${id}?api_key=4eb5c031eab630e105a371a7a7c4488e`);
+  // }
   getMovieTypes(type): Observable<any> {
     return this.http.get(`${this.baseURL}/movie${type}?api_key=4eb5c031eab630e105a371a7a7c4488e`);
   }
@@ -68,18 +69,33 @@ export class MovieApiService {
   }
   getUserData(user) {
     console.log(user);
-    let docRef = this.user.doc(user.uid);
+    const docRef = this.user.doc(user.uid);
     console.log(docRef);
     docRef.get().then( doc => {
       if (doc.exists) {
         this.userData = doc.data().watchlist;
+        this.watchedData = doc.data().history;
         console.log(this.userData);
-        console.log("doc data", doc.data());
+        console.log('doc data', doc.data());
       } else {
         console.log('no doc');
       }
         }
-    ).catch(error => console.log('nothing', error))
+    ).catch(error => console.log('nothing', error));
+    // return this.user.doc(user.uid)
+  }
+  getWatchedList(user) {
+    const docRef = this.user.doc(user.uid);
+    docRef.get().then( doc => {
+          if (doc.exists) {
+            this.userData = doc.data().history;
+            console.log(this.userData);
+            console.log('doc data', doc.data());
+          } else {
+            console.log('no doc');
+          }
+        }
+    ).catch(error => console.log('nothing', error));
     // return this.user.doc(user.uid)
   }
 }

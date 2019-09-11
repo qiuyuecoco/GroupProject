@@ -25,6 +25,8 @@ const routes: Routes = [
   { path: 'now-playing', loadChildren: './movies-list/now-playing/now-playing.module#NowPlayingPageModule' },
   { path: 'latest', loadChildren: './movies-list/latest/latest.module#LatestPageModule' },
   { path: 'top-rated', loadChildren: './movies-list/top-rated/top-rated.module#TopRatedPageModule' },
+  { path: 'watch-list', loadChildren: './list/watch-list/watch-list.module#WatchListPageModule' },
+  { path: 'watched-list', loadChildren: './list/watched-list/watched-list.module#WatchedListPageModule' },
 ];
 
 @NgModule({

@@ -31,7 +31,7 @@ export class HomePage {
       private loader: LoadingController,
       private router: Router
   ) {
-    console.log('** NAV PARAMS:', this.movieId);
+    // console.log('** NAV PARAMS:', this.movieId);
   }
   async categoryTapped(categoryType) {
     const loading = await this.loader.create({message: 'Loading category list...'});

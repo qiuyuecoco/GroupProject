@@ -14,12 +14,16 @@ export class MovieApiService {
   movie: Movie;
   selectedMovie: Movie;
   watchList = [];
+  watchedList = [];
 
   private movies: Movies[];
   private baseURL = 'https://api.themoviedb.org/3';
 
   constructor(private http: HttpClient) { }
 
+  getWatchedMovies(id): Observable<Movie> {
+    return this.http.get(`${this.baseURL}/movie/${id}?api_key=4eb5c031eab630e105a371a7a7c4488e`);
+  }
   getMovieTypes(type): Observable<any> {
     return this.http.get(`${this.baseURL}/movie${type}?api_key=4eb5c031eab630e105a371a7a7c4488e`);
   }

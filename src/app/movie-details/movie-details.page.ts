@@ -36,6 +36,10 @@ export class MovieDetailsPage implements OnInit {
     this.user = this.accountService.loadedUser;
     console.log(this.user);
   }
+  addToWatchedList() {
+    const selectedMovie = this.movieId;
+    this.movieApiService.watchedList.push(selectedMovie);
+    console.log(this.movieApiService.watchedList);  }
 
   addToWatchlist() {
     const selectedMovie = this.movieId;

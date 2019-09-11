@@ -10,6 +10,9 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import { FilterMoviesPipe } from './shared/filter-movies.pipe';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '../environments/environment';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [AppComponent, FilterMoviesPipe],
@@ -18,6 +21,8 @@ import { FilterMoviesPipe } from './shared/filter-movies.pipe';
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
     AppRoutingModule
   ],
   providers: [

@@ -5,11 +5,6 @@ import {Observable} from 'rxjs';
 import {Movies} from './model/movies';
 import {Movie} from './model/movie';
 import {map} from 'rxjs/operators';
-import {AccountService} from './account.service';
-import * as firebase from 'firebase';
-import {User} from './model/user';
-import {AngularFirestoreCollection, AngularFirestoreDocument} from '@angular/fire/firestore';
-import {AngularFireObject} from '@angular/fire/database';
 
 
 @Injectable({
@@ -21,6 +16,7 @@ export class MovieApiService {
   watchList: number[] = [];
   user: firebase.firestore.CollectionReference;
   userData: number[];
+  watchedList = [];
 
   private movies: Movies[];
   private baseURL = 'https://api.themoviedb.org/3';
@@ -32,6 +28,9 @@ export class MovieApiService {
     this.user = this.accountService.dB.collection('ACCOUNTS');
   }
 
+  getWatchedMovies(id): Observable<Movie> {
+    return this.http.get(`${this.baseURL}/movie/${id}?api_key=4eb5c031eab630e105a371a7a7c4488e`);
+  }
   getMovieTypes(type): Observable<any> {
     return this.http.get(`${this.baseURL}/movie${type}?api_key=4eb5c031eab630e105a371a7a7c4488e`);
   }

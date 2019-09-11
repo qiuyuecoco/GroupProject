@@ -12,7 +12,6 @@ import {AccountService} from '../../account.service';
   styleUrls: ['./watched-list.page.scss'],
 })
 export class WatchedListPage implements OnInit {
-
   watched: number[] = [];
   private movie: Movie [] = [];
   private user: User;
@@ -22,7 +21,9 @@ export class WatchedListPage implements OnInit {
       private loader: LoadingController,
       private navCtrl: NavController,
       private accountService: AccountService
-  ) { }
+  ) {
+    this.watched = this.api.userData;
+  }
 
   async ngOnInit() {
     this.user = this.accountService.loadedUser;
@@ -38,13 +39,12 @@ export class WatchedListPage implements OnInit {
         this.api.getMovieById(this.watched[i]).subscribe(data => {
           this.movie.push(data);
           return this.movie;
-          console.log('Movie data: ', this.movie);
+          // console.log('Movie data: ', this.movie);
         });
       }
       loading.dismiss();
     });
   }
-
 
   movieClicked(movie: Movie) {
     this.api.movie = movie;

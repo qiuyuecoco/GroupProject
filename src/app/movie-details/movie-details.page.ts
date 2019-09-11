@@ -16,6 +16,7 @@ export class MovieDetailsPage implements OnInit {
   private movie: Movie;
   voteCount: number;
   private user: User;
+  private isChecked = false;
 
   get movieId(): number {
     return this.movieApiService.movie.id;
@@ -35,11 +36,17 @@ export class MovieDetailsPage implements OnInit {
     });
     this.user = this.accountService.loadedUser;
     console.log(this.user);
+    this.movieApiService.getUserData(this.user);
   }
+
   addToWatchedList() {
     const selectedMovie = this.movieId;
-    this.movieApiService.watchedList.push(selectedMovie);
-    console.log(this.movieApiService.watchedList);  }
+    if (!this.isChecked) {
+      this.movieApiService.watchedList.push(selectedMovie);
+      this.movieApiService.saveToWatchedList(this.user);
+    }
+  }
+
 
   addToWatchlist() {
     const selectedMovie = this.movieId;

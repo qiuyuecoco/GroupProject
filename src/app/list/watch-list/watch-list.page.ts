@@ -3,7 +3,6 @@ import {MovieApiService} from '../../movie-api.service';
 import {Movie} from '../../model/movie';
 import {AccountService} from '../../account.service';
 import {User} from '../../model/user';
-import {async} from 'rxjs/internal/scheduler/async';
 import {LoadingController} from '@ionic/angular';
 
 @Component({
@@ -33,21 +32,14 @@ export class WatchListPage implements OnInit {
     loading.present().then(() => {
         this.watchList = this.movieApiService.userData;
         console.log(this.watchList);
-      // for (let m = 0; m < this.watchList.length; m++) {
-      //   this.movieApiService.getMovieById(this.watchList[m]).subscribe(movie => {
-      //     this.movie.push(movie);
-      //     return this.movie;
-      //   })
-      // }
+        for (let m = 0; m < this.watchList.length; m++) {
+          this.movieApiService.getMovieById(this.watchList[m]).subscribe(movie => {
+            this.movie.push(movie);
+            return this.movie;
+        })
+      }
         loading.dismiss();
     });
-
-    // for (let m = 0; m < this.watchList.length; m++) {
-    //   this.movieApiService.getMovieById(this.watchList[m]).subscribe(movie => {
-    //     this.movie.push(movie);
-    //     return this.movie;
-    //   })
-    // }
   }
 
 }

@@ -3,6 +3,7 @@ import * as firebase from 'firebase';
 import {Router} from '@angular/router';
 import {environment} from '../environments/environment';
 
+
 firebase.initializeApp(environment.firebase);
 const db = firebase.firestore();
 @Injectable({
@@ -11,6 +12,7 @@ const db = firebase.firestore();
 export class AccountService {
   provider = new firebase.auth.GoogleAuthProvider();
   loadedUser: any;
+  dB = db;
   constructor(private router: Router) { }
   login() {
     firebase.auth().onAuthStateChanged((user) => {

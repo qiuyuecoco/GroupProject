@@ -5,23 +5,24 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngIf="!watchMovie">
+  <ion-card *ngIf="!movie">
     <ion-card-content>
       <ion-card-header>You haven't seen any movies!</ion-card-header>
     </ion-card-content>
   </ion-card>
-  <ion-card *ngIf="watchMovie">
+  <ion-card *ngIf="movie">
     <ion-card-content>
-      <ion-card-title>Here's what you've watched already: click a movie for more details </ion-card-title>
+      <ion-card-title>Click a movie for more details... </ion-card-title>
     </ion-card-content>
   </ion-card>
 
-  <ion-list *ngFor="let item of watched; index as i">
-    <ion-item onl>
+<!--  <ion-list *ngFor="let item of watched; index as i">-->
+  <ion-list *ngFor="let item of movie" (click)="movieClicked(item)">
+    <ion-item>
       <ion-thumbnail slot="start">
         <img src="https://image.tmdb.org/t/p/w500{{ item.backdrop_path }}">
       </ion-thumbnail>
-        <ion-title>{{i + 1}}{{ item.original_title }}</ion-title>
+        <ion-title>{{ item.original_title }}</ion-title>
         <ion-label>
           <ion-text>{{item.tagline}}</ion-text>
         </ion-label>

@@ -32,7 +32,7 @@ export class MovieApiService {
       ) {
     this.user = this.accountService.dB.collection('ACCOUNTS');
   }
-  redirectWithToken(): Observable<any> {
+  redirectWithToken(token): Observable<any> {
     // return this.http.get(`https://www.themoviedb.org/authenticate/${this.token.request_token}?redirect_to=http://localhost:8100/`);
     return this.http.get(`https://www.themoviedb.org/authenticate/${this.token.request_token}`);
   }
@@ -105,13 +105,13 @@ export class MovieApiService {
     return this.http.get(url).subscribe(data => {
       this.token = data;
       console.log(this.token.request_token);
-    })
+    });
   }
   createUserSession() {
     const url = 'https://api.themoviedb.org/3/authentication/guest_session/new?api_key=4eb5c031eab630e105a371a7a7c4488e';
     return this.http.get(url).subscribe(data => {
       this.userSession = data;
       console.log(this.userSession);
-    })
+    });
   }
 }

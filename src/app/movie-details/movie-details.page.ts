@@ -18,7 +18,6 @@ export class MovieDetailsPage implements OnInit {
   voteCount: number;
   private user: User;
   private isChecked = false;
-  token = this.movieApiService.token;
 
   get movieId(): number {
     return this.movieApiService.movie.id;
@@ -37,7 +36,8 @@ export class MovieDetailsPage implements OnInit {
     });
     this.user = this.accountService.loadedUser;
     this.movieApiService.getUserData(this.user);
-    this.movieApiService.getToken();
+    // this.movieApiService.getToken();
+    this.movieApiService.createUserSession();
   }
 
   addToWatchedList() {
@@ -59,6 +59,8 @@ export class MovieDetailsPage implements OnInit {
     this.voteCount += 1;
   }
   authToken() {
-
+    this.movieApiService.redirectWithToken().subscribe(data => {
+      console.log(data)
+    });
   }
 }

@@ -20,6 +20,7 @@ export class MovieApiService {
   watchedList: number[] = [];
   watchedData: number[];
   token;
+  userSession;
 
   private movies: Movies[];
   private baseURL = 'https://api.themoviedb.org/3';
@@ -31,12 +32,9 @@ export class MovieApiService {
       ) {
     this.user = this.accountService.dB.collection('ACCOUNTS');
   }
-  getToken(): Observable<any> {
-    return this.http.get(`${this.baseURL}/authentication/token/new${environment.movieApiKey}`);
-  }
-  redirectWithToken(token): Observable<any> {
-    return this.http.get(`https://www.themoviedb.org/authenticate/
-    ${token}?redirect_to=http://localhost:8100/approved`);
+  redirectWithToken(): Observable<any> {
+    // return this.http.get(`https://www.themoviedb.org/authenticate/${this.token.request_token}?redirect_to=http://localhost:8100/`);
+    return this.http.get(`https://www.themoviedb.org/authenticate/${this.token.request_token}`);
   }
 
 
@@ -74,15 +72,15 @@ export class MovieApiService {
         .catch(error => console.log('not added', error));
   }
   getUserData(user) {
-    console.log(user);
+    // console.log(user);
     const docRef = this.user.doc(user.uid);
-    console.log(docRef);
+    // console.log(docRef);
     docRef.get().then( doc => {
       if (doc.exists) {
         this.userData = doc.data().watchlist;
         this.watchedData = doc.data().history;
-        console.log(this.userData);
-        console.log('doc data', doc.data());
+        // console.log(this.userData);
+        // console.log('doc data', doc.data());
       } else {
         console.log('no doc');
       }
@@ -103,10 +101,17 @@ export class MovieApiService {
   //   ).catch(error => console.log('nothing', error));
   // }
   getToken() {
-    const url = `https://api.themoviedb.org/3/authentication/token/new?api_key=4eb5c031eab630e105a371a7a7c4488e&language=en-US`
+    const url = `https://api.themoviedb.org/3/authentication/token/new?api_key=4eb5c031eab630e105a371a7a7c4488e&language=en-US`;
     return this.http.get(url).subscribe(data => {
       this.token = data;
-      console.log(this.token);
+      console.log(this.token.request_token);
+    })
+  }
+  createUserSession() {
+    const url = 'https://api.themoviedb.org/3/authentication/guest_session/new?api_key=4eb5c031eab630e105a371a7a7c4488e';
+    return this.http.get(url).subscribe(data => {
+      this.userSession = data;
+      console.log(this.userSession);
     })
   }
 }

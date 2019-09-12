@@ -6,7 +6,9 @@ import {Observable} from 'rxjs';
 import {User} from '../model/user';
 import {AccountService} from '../account.service';
 import * as firebase from 'firebase';
-import {fromDocRef} from "@angular/fire/firestore";
+import {fromDocRef} from '@angular/fire/firestore';
+import {FormControl} from '@angular/forms';
+
 
 const db = firebase.firestore();
 @Component({
@@ -21,6 +23,8 @@ export class MovieDetailsPage implements OnInit {
   private isChecked = false;
   private Comments = [];
   document = document;
+  ratingCtrl = new FormControl();
+
   get movieId(): number {
     return this.movieApiService.movie.id;
   }
@@ -34,12 +38,11 @@ export class MovieDetailsPage implements OnInit {
     const selectedMovieId = this.movieId;
     this.movieApiService.getMovieById(selectedMovieId).subscribe(movie => {
       this.movie = movie;
-      this.voteCount = movie.vote_count;
-      console.log(this.movie);
     });
     this.user = this.accountService.loadedUser;
-    console.log(this.user);
     this.movieApiService.getUserData(this.user);
+    // this.movieApiService.getToken();
+    this.movieApiService.createUserSession();
   }
 
   addToWatchedList() {
@@ -95,5 +98,16 @@ export class MovieDetailsPage implements OnInit {
 
   addVote() {
     this.voteCount += 1;
+  }
+  authToken() {
+    this.movieApiService.redirectWithToken().subscribe(data => {
+      console.log(data);
+    });
+  }
+  attachGuestSessionId() {
+    const rateValue = this.ratingCtrl.value;
+    const movieId = this.movieId;
+    this.movieApiService.rateMovieWithSessionAndId(movieId, rateValue);
+    console.log(movieId);
   }
 }

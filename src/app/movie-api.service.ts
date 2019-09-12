@@ -19,6 +19,7 @@ export class MovieApiService {
   userData: number[];
   watchedList: number[] = [];
   watchedData: number[];
+  token;
 
   private movies: Movies[];
   private baseURL = 'https://api.themoviedb.org/3';
@@ -88,17 +89,24 @@ export class MovieApiService {
         }
     ).catch(error => console.log('nothing', error))
   }
-  getWatchedList(user) {
-    const docRef = this.user.doc(user.uid);
-    docRef.get().then( doc => {
-          if (doc.exists) {
-            this.userData = doc.data().history;
-            console.log(this.userData);
-            console.log('doc data', doc.data());
-          } else {
-            console.log('no doc');
-          }
-        }
-    ).catch(error => console.log('nothing', error));
+  // getWatchedList(user) {
+  //   const docRef = this.user.doc(user.uid);
+  //   docRef.get().then( doc => {
+  //         if (doc.exists) {
+  //           this.userData = doc.data().history;
+  //           console.log(this.userData);
+  //           console.log('doc data', doc.data());
+  //         } else {
+  //           console.log('no doc');
+  //         }
+  //       }
+  //   ).catch(error => console.log('nothing', error));
+  // }
+  getToken() {
+    const url = `https://api.themoviedb.org/3/authentication/token/new?api_key=4eb5c031eab630e105a371a7a7c4488e&language=en-US`
+    return this.http.get(url).subscribe(data => {
+      this.token = data;
+      console.log(this.token);
+    })
   }
 }

@@ -7,6 +7,7 @@ import {User} from '../model/user';
 import {AccountService} from '../account.service';
 
 
+
 @Component({
   selector: 'app-movie-details',
   templateUrl: './movie-details.page.html',
@@ -17,6 +18,7 @@ export class MovieDetailsPage implements OnInit {
   voteCount: number;
   private user: User;
   private isChecked = false;
+  token = this.movieApiService.token;
 
   get movieId(): number {
     return this.movieApiService.movie.id;
@@ -32,11 +34,10 @@ export class MovieDetailsPage implements OnInit {
     this.movieApiService.getMovieById(selectedMovieId).subscribe(movie => {
       this.movie = movie;
       this.voteCount = movie.vote_count;
-      console.log(this.movie);
     });
     this.user = this.accountService.loadedUser;
-    console.log(this.user);
     this.movieApiService.getUserData(this.user);
+    this.movieApiService.getToken();
   }
 
   addToWatchedList() {
@@ -56,5 +57,8 @@ export class MovieDetailsPage implements OnInit {
 
   addVote() {
     this.voteCount += 1;
+  }
+  authToken() {
+
   }
 }

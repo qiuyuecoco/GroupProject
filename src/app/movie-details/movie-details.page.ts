@@ -60,7 +60,13 @@ export class MovieDetailsPage implements OnInit {
   }
   authToken() {
     this.movieApiService.redirectWithToken().subscribe(data => {
-      console.log(data)
+      console.log(data);
     });
+  }
+  attachGuestSessionId() {
+    const rateValue = this.ratingCtrl.value;
+    const movieId = this.movieId;
+    this.movieApiService.rateMovieWithSessionAndId(movieId, rateValue);
+    console.log(movieId);
   }
 }

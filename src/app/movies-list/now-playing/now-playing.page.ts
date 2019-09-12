@@ -19,7 +19,7 @@ export class NowPlayingPage implements OnInit {
 
   async ngOnInit() {
     const loading = await this.loader.create({
-      message: 'Getting movies that are now playing...'
+      message: 'now playing...'
     });
     const type = '/now_playing';
     loading.present().then(() => {

@@ -21,7 +21,6 @@ export class MovieApiService {
   watchedData: number[];
   token;
   userSession;
-  sessionId;
 
 
   private movies: Movies[];
@@ -34,18 +33,16 @@ export class MovieApiService {
       ) {
     this.user = this.accountService.dB.collection('ACCOUNTS');
   }
-  redirectWithToken(): Observable<any> {
-    // return this.http.get(`https://www.themoviedb.org/authenticate/${this.token.request_token}?redirect_to=http://localhost:8100/`);
-    return this.http.get(`https://www.themoviedb.org/authenticate/${this.token.request_token}`);
+  searchMovie(query): Observable<any> {
+    return this.http.get(`${this.baseURL}/search/movie${environment.movieApiKey}&language=en-US&query=${query}&include_adult=false`);
   }
 
-
   getMovieTypes(type): Observable<any> {
-    return this.http.get(`${this.baseURL}/movie${type}?api_key=4eb5c031eab630e105a371a7a7c4488e`);
+    return this.http.get(`${this.baseURL}/movie${type}${environment.movieApiKey}`);
   }
 
   dynamicMovieTypes(action, type): Observable<any> {
-    const url = `https://api.themoviedb.org/3/${action}/${type}?api_key=4eb5c031eab630e105a371a7a7c4488e`;
+    const url = `https://api.themoviedb.org/3/${action}/${type}${environment.movieApiKey}`;
     return this.http.get(url).pipe(map(data => data)
     );
   }
@@ -89,25 +86,16 @@ export class MovieApiService {
         }
     ).catch(error => console.log('nothing', error));
   }
-  // getWatchedList(user) {
-  //   const docRef = this.user.doc(user.uid);
-  //   docRef.get().then( doc => {
-  //         if (doc.exists) {
-  //           this.userData = doc.data().history;
-  //           console.log(this.userData);
-  //           console.log('doc data', doc.data());
-  //         } else {
-  //           console.log('no doc');
-  //         }
-  //       }
-  //   ).catch(error => console.log('nothing', error));
-  // }
   getToken() {
     const url = `https://api.themoviedb.org/3/authentication/token/new?api_key=4eb5c031eab630e105a371a7a7c4488e&language=en-US`;
     return this.http.get(url).subscribe(data => {
       this.token = data;
       console.log(this.token.request_token);
     });
+  }
+  redirectWithToken(): Observable<any> {
+    // return this.http.get(`https://www.themoviedb.org/authenticate/${this.token.request_token}?redirect_to=http://localhost:8100/`);
+    return this.http.get(`https://www.themoviedb.org/authenticate/${this.token.request_token}`);
   }
   createUserSession() {
     const url = 'https://api.themoviedb.org/3/authentication/guest_session/new?api_key=4eb5c031eab630e105a371a7a7c4488e';
@@ -122,7 +110,7 @@ export class MovieApiService {
     return this.http.post(url, {value: rateValue}).subscribe(data => {
 
       // this.sessionId = data;
-      console.log('session & id: ', this.sessionId);
+      console.log('session & id: ', this.userSession);
     });
   }
 

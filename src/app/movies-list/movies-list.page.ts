@@ -21,7 +21,7 @@ export class MoviesListPage implements OnInit {
 
   async ngOnInit() {
     const loading = await this.loader.create({
-      message: 'Getting movies...'
+      message: 'top rated...'
     });
     const type = 'top_rated';
     const action = 'movie';

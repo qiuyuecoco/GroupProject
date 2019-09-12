@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Movies} from '../../model/movies';
 import {MovieApiService} from '../../movie-api.service';
 import {Movie} from '../../model/movie';
-import {NavController} from '@ionic/angular';
+import {LoadingController, NavController} from '@ionic/angular';
 
 @Component({
   selector: 'app-popular',
@@ -15,12 +15,19 @@ export class PopularPage implements OnInit {
   constructor(
       private movieApiService: MovieApiService,
       private navCtrl: NavController,
+      private loader: LoadingController
   ) { }
 
-  ngOnInit() {
-    this.movieApiService.getPopularMovies().subscribe(data => {
-      this.popularMovies = data;
-      console.log(data);
+  async ngOnInit() {
+    const loading = await this.loader.create({
+      message: 'popular...'
+    });
+    const type = '/popular';
+    loading.present().then(() => {
+      this.movieApiService.getMovieTypes(type).subscribe(data => {
+        this.popularMovies = data;
+        loading.dismiss();
+      });
     });
   }
 

@@ -9,14 +9,22 @@
 
 <ion-content>
     <ion-card class="welcome-card">
-      <img src="/assets/icon/popcorn-film-cinema.png" alt="popcorn film cinema background image" />
-      <ion-card-header>
-        <ion-card-subtitle>Get Started</ion-card-subtitle>
-<!--        <ion-card-title>Find selection by category</ion-card-title>-->
-      </ion-card-header>
-      <ion-card-content>
-        <p>Select a category below & add movies to your watch list!</p>
-      </ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <img src="/assets/icon/popcorn-film-cinema.png" alt="popcorn film cinema background image" />
+          </ion-col>
+          <ion-col>
+            <ion-card-header>
+              <ion-card-subtitle>Get Started</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <p>Select a movie to add to your watch list, rate, comment & more!</p>
+            </ion-card-content>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
     </ion-card>
 
     <ion-list *ngIf="allTypes">

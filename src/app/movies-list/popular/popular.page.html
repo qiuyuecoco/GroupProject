@@ -15,24 +15,22 @@
   </ion-card>
 
   <ion-card *ngIf="popularMovies" >
-    <ion-card-content *ngFor="let movie of popularMovies.results">
+    <ion-card-content *ngFor="let movie of popularMovies.results" (click)="movieClicked(movie)">
       <ion-card-header> {{ movie.original_title }} </ion-card-header>
       <ion-list>
         <ion-item>
           <ion-grid>
             <ion-row>
-              <ion-col>
+              <ion-col class="poster-image">
                 <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}">
               </ion-col>
-              <ion-col>
-                <p> Overview: {{movie.overview}}</p>
-              </ion-col>
+
               <ion-col>
                 <h1> {{ movie.title }} </h1>
                 <h4> Rating: {{movie.vote_average}}</h4>
                 <h4> Release Date: {{movie.release_date}}</h4>
                 <img src="https://image.tmdb.org/t/p/w500{{ movie.backdrop_path }}">
-                <ion-button (click)="movieClicked(movie)"> More Details & options</ion-button>
+                <p> Overview: {{movie.overview}}</p>
               </ion-col>
             </ion-row>
           </ion-grid>

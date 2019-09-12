@@ -19,7 +19,7 @@ export class UpcomingPage implements OnInit {
 
   async ngOnInit() {
     const loading = await this.loader.create({
-      message: 'Getting your upcoming movies...'
+      message: 'upcoming movies...'
     });
     const type = '/upcoming';
     loading.present().then(() => {

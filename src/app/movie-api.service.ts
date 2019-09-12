@@ -22,6 +22,7 @@ export class MovieApiService {
 
   private movies: Movies[];
   private baseURL = 'https://api.themoviedb.org/3';
+  private tokenUrl = 'https://api.themoviedb.org/3/authentication/token/new?api_key=4eb5c031eab630e105a371a7a7c4488e';
 
   constructor(
       private http: HttpClient,
@@ -29,6 +30,14 @@ export class MovieApiService {
       ) {
     this.user = this.accountService.dB.collection('ACCOUNTS');
   }
+  getToken(): Observable<any> {
+    return this.http.get(`${this.baseURL}/authentication/token/new${environment.movieApiKey}`);
+  }
+  redirectWithToken(token): Observable<any> {
+    return this.http.get(`https://www.themoviedb.org/authenticate/
+    ${token}?redirect_to=http://localhost:8100/approved`);
+  }
+
 
   getMovieTypes(type): Observable<any> {
     return this.http.get(`${this.baseURL}/movie${type}?api_key=4eb5c031eab630e105a371a7a7c4488e`);

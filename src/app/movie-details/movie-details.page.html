@@ -76,6 +76,14 @@
           <ion-checkbox color="primary" [(ngModel)]="isChecked" (click)="addToWatchedList()"></ion-checkbox>
         </ion-col>
       </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item><ion-input id="comment_text"></ion-input></ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="addComment(movie.id, document.getElementById('comment_text').value)">COMMENT</ion-button>
+        </ion-col>
+      </ion-row>
     </ion-card-content>
   </ion-card>
 </ion-content>

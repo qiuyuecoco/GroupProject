@@ -5,8 +5,9 @@ import {Movie} from '../model/movie';
 import {Observable} from 'rxjs';
 import {User} from '../model/user';
 import {AccountService} from '../account.service';
+import * as firebase from 'firebase';
 
-
+const db = firebase.firestore();
 @Component({
   selector: 'app-movie-details',
   templateUrl: './movie-details.page.html',
@@ -17,7 +18,8 @@ export class MovieDetailsPage implements OnInit {
   voteCount: number;
   private user: User;
   private isChecked = false;
-
+  private Comments = [];
+  document = document;
   get movieId(): number {
     return this.movieApiService.movie.id;
   }
@@ -52,6 +54,57 @@ export class MovieDetailsPage implements OnInit {
     const selectedMovie = this.movieId;
     this.movieApiService.watchList.push(selectedMovie);
     this.movieApiService.saveMovieToDb(this.user);
+  }
+
+  addRating(movieID) {
+    const docRef = db.collection('Movie_Ratings').doc(movieID);
+    docRef.get()
+        .then(docSnapshot => {
+          if (docSnapshot.exists) {
+            // do something
+          } else {
+            console.log('Create Document');
+          }
+        });
+  }
+
+  addComment(movieID, comment_text) {
+    let docData: any;
+    const docRef = db.collection('Movie_user_comments').doc(movieID.toString());
+    docRef.get()
+        .then(docSnapshot => {
+          if (docSnapshot.exists) {
+            docRef.onSnapshot((doc) => {
+              docData = doc.data();
+              console.log(docData);
+              this.Comments = docData.comments;
+            });
+            this.Comments.push({
+              user: this.accountService.loadedUser.displayName,
+              comment: comment_text,
+            });
+            docRef.set({
+              comments: this.Comments
+            }).then(() => {
+              console.log(`Document Successfully Updated.`);
+            }).catch((error) => {
+              console.log(`Error Writing Document: ${error}`);
+            });
+          } else {
+            console.log('Create Document');
+            this.Comments.push({
+              user: this.accountService.loadedUser.displayName,
+              comment: comment_text,
+            });
+            docRef.set({
+              comments: this.Comments
+            }).then(() => {
+              console.log(`Document Successfully Written.`);
+            }).catch((error) => {
+              console.log(`Error Writing Document: ${error}`);
+            });
+          }
+        });
   }
 
   addVote() {

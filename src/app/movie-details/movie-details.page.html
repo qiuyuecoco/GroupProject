@@ -72,7 +72,8 @@
           <ion-button (click)="addToWatchlist()">Add To WatchList</ion-button>
         </ion-col>
         <ion-col>
-          <ion-button>Seen It</ion-button>
+          <ion-label style="font-size: 20px">Seen It</ion-label>
+          <ion-checkbox color="primary" [(ngModel)]="isChecked" (click)="addToWatchedList()"></ion-checkbox>
         </ion-col>
       </ion-row>
     </ion-card-content>

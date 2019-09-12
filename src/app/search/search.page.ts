@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {MovieApiService} from '../movie-api.service';
 import {Observable} from 'rxjs';
-import {NavController} from "@ionic/angular";
-import {Movie} from "../model/movie";
+import {NavController} from '@ionic/angular';
+import {Movie} from '../model/movie';
 
 @Component({
   selector: 'app-search',
@@ -10,7 +10,7 @@ import {Movie} from "../model/movie";
   styleUrls: ['./search.page.scss'],
 })
 export class SearchPage implements OnInit {
-  // @ts-ignore
+  MoviesList: any = [];
   movies = {
     upcoming: {
       results: []
@@ -24,11 +24,8 @@ export class SearchPage implements OnInit {
     now_playing: {
       results: []
     },
-    latest: {
-      results: []
-    }
+    All: this.MoviesList
   };
-  MoviesList: any = [];
   filtered: any[] = [];
   constructor(
       private movieAPI: MovieApiService,
@@ -39,7 +36,32 @@ export class SearchPage implements OnInit {
   ngOnInit() {
     this.getMovie();
   }
-  searchByName() {
+  searchByName(category) {
+    // @ts-ignore
+    if (document.getElementById('searchCategory').value === 'All') {
+      category = this.movies.All;
+      console.log(category);
+    }
+    // @ts-ignore
+    if (document.getElementById('searchCategory').value === 'Upcoming') {
+      category = this.movies.upcoming.results;
+      console.log(category);
+    }
+    // @ts-ignore
+    if (document.getElementById('searchCategory').value === 'Top Rated') {
+      category = this.movies.top_rated.results;
+      console.log(category);
+    }
+    // @ts-ignore
+    if (document.getElementById('searchCategory').value === 'Popular') {
+      category = this.movies.popular.results;
+      console.log(category);
+    }
+    // @ts-ignore
+    if (document.getElementById('searchCategory').value === 'Now Playing') {
+      category = this.movies.now_playing.results;
+      console.log(category);
+    }
     if (document.getElementById('searchBar')) {
       // @ts-ignore
       const Query = document.getElementById('searchBar').value;
@@ -47,11 +69,11 @@ export class SearchPage implements OnInit {
       // @ts-ignore
       if (Query !== undefined) {
 // tslint:disable-next-line:prefer-for-of
-        for (let i = 0; i < this.MoviesList.length; i++) {
+        for (let i = 0; i < category.length; i++) {
           // @ts-ignore
-          if (this.MoviesList[i].title.toLowerCase().includes(Query.toLowerCase())) {
+          if (category[i].title.toLowerCase().includes(Query.toLowerCase())) {
             // @ts-ignore
-            this.filtered.push(this.MoviesList[i]);
+            this.filtered.push(category[i]);
           } else {
             if (Query === '' || Query === null || Query === undefined) {
               this.resetQuery();
@@ -59,7 +81,7 @@ export class SearchPage implements OnInit {
           }
         }
       } else {
-        this.filtered = this.MoviesList;
+        this.filtered = category;
       }
     }
   }
@@ -106,16 +128,6 @@ export class SearchPage implements OnInit {
       this.SortAlphabetically();
 
     });
-    // this.movieAPI.dynamicMovieTypes('movie', 'latest').subscribe(data => {
-    //   this.movies.latest = data;
-    //   console.log(data.results);
-    //   // tslint:disable-next-line:prefer-for-of
-    //   for (let i = 0; i < this.movies.latest.results.length; i++) {
-    //     this.MoviesList.push(this.movies.latest.results[i]);
-    //   }
-    //   this.filtered = this.MoviesList;
-    // });
-    // this.filtered = this.MoviesList;
   }
   SortAlphabetically() {
     this.MoviesList.sort((a, b) => {
@@ -123,8 +135,34 @@ export class SearchPage implements OnInit {
       if (a.title > b.title) { return 1; }
       return 0;
     });
+    this.movies.upcoming.results.sort((a, b) => {
+      if (a.title < b.title) { return -1; }
+      if (a.title > b.title) { return 1; }
+      return 0;
+    });
+    this.movies.top_rated.results.sort((a, b) => {
+      if (a.title < b.title) { return -1; }
+      if (a.title > b.title) { return 1; }
+      return 0;
+    });
+    this.movies.popular.results.sort((a, b) => {
+      if (a.title < b.title) { return -1; }
+      if (a.title > b.title) { return 1; }
+      return 0;
+    });
+    this.movies.now_playing.results.sort((a, b) => {
+      if (a.title < b.title) { return -1; }
+      if (a.title > b.title) { return 1; }
+      return 0;
+    });
+    this.movies.All = this.MoviesList;
+    this.movies.All.sort((a, b) => {
+      if (a.title < b.title) { return -1; }
+      if (a.title > b.title) { return 1; }
+      return 0;
+    });
     console.log(this.MoviesList);
-    this.searchByName();
+    this.searchByName(null);
   }
   removeDupes() {
     this.MoviesList = Array.from(new Set(this.MoviesList.map(a => a.id)))

@@ -155,6 +155,7 @@ export class SearchPage implements OnInit {
       if (a.title > b.title) { return 1; }
       return 0;
     });
+    this.removeDupes();
     this.movies.All = this.MoviesList;
     this.movies.All.sort((a, b) => {
       if (a.title < b.title) { return -1; }
@@ -166,6 +167,10 @@ export class SearchPage implements OnInit {
   }
   removeDupes() {
     this.MoviesList = Array.from(new Set(this.MoviesList.map(a => a.id)))
+        .map(id => {
+          return this.MoviesList.find(a => a.id === id);
+        });
+    this.movies.All = Array.from(new Set(this.MoviesList.map(a => a.id)))
         .map(id => {
           return this.MoviesList.find(a => a.id === id);
         });

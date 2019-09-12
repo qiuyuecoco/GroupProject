@@ -47,7 +47,9 @@
         <ion-col>
           <ion-card-title>Homepage</ion-card-title>
         </ion-col>
-        <ion-col>{{ movie.homepage }}</ion-col>
+        <ion-col>
+          <a href="{{movie.homepage}}">{{ movie.homepage }}</a>
+        </ion-col>
         <ion-col>
           <ion-card-title>Runtime</ion-card-title>
         </ion-col>
@@ -61,19 +63,22 @@
         <ion-col>
           <ion-card-title>Votes</ion-card-title>
         </ion-col>
-        <ion-col>{{ voteCount }}</ion-col>
+        <ion-col>{{ movie.vote_count }}</ion-col>
       </ion-row>
       </ion-grid>
       <ion-row>
         <ion-col>
-          <ion-button (click)="authToken()">Vote</ion-button>
+          <ion-row>
+          <ion-input style="max-width: 52px" [formControl]="ratingCtrl" step="0.5" type="number" max="10" min="0" value="0.00"></ion-input>
+          <ion-button (click)="addRating()">Add Rating</ion-button>
+          </ion-row>
         </ion-col>
         <ion-col>
           <ion-button (click)="addToWatchlist()">Add To WatchList</ion-button>
         </ion-col>
-        <ion-col>
-          <ion-label style="font-size: 20px">Seen It</ion-label>
-          <ion-checkbox color="primary" [(ngModel)]="isChecked" (click)="addToWatchedList()"></ion-checkbox>
+        <ion-col style="margin-top: 10px;">
+          <ion-label style="font-size: 20px; margin-right: 10px">Seen It</ion-label>
+          <ion-checkbox style="margin-top: 0" color="primary" [(ngModel)]="isChecked" (click)="addToWatchedList()"></ion-checkbox>
         </ion-col>
       </ion-row>
     </ion-card-content>

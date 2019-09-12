@@ -5,6 +5,7 @@ import {Movie} from '../model/movie';
 import {Observable} from 'rxjs';
 import {User} from '../model/user';
 import {AccountService} from '../account.service';
+import {FormControl} from '@angular/forms';
 
 
 
@@ -15,9 +16,9 @@ import {AccountService} from '../account.service';
 })
 export class MovieDetailsPage implements OnInit {
   private movie: Movie;
-  voteCount: number;
   private user: User;
   private isChecked = false;
+  ratingCtrl = new FormControl();
 
   get movieId(): number {
     return this.movieApiService.movie.id;
@@ -32,7 +33,6 @@ export class MovieDetailsPage implements OnInit {
     const selectedMovieId = this.movieId;
     this.movieApiService.getMovieById(selectedMovieId).subscribe(movie => {
       this.movie = movie;
-      this.voteCount = movie.vote_count;
     });
     this.user = this.accountService.loadedUser;
     this.movieApiService.getUserData(this.user);
@@ -55,12 +55,8 @@ export class MovieDetailsPage implements OnInit {
     this.movieApiService.saveMovieToDb(this.user);
   }
 
-  addVote() {
-    this.voteCount += 1;
-  }
-  authToken() {
-    this.movieApiService.redirectWithToken().subscribe(data => {
-      console.log(data)
-    });
+  addRating() {
+    const value = this.ratingCtrl.value;
+    console.log(value);
   }
 }

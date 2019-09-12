@@ -13,6 +13,7 @@ import { FilterMoviesPipe } from './shared/filter-movies.pipe';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, FilterMoviesPipe],
@@ -23,7 +24,8 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
     IonicModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
   ],
   providers: [
     StatusBar,

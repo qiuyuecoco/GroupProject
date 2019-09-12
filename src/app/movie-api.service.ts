@@ -84,18 +84,4 @@ export class MovieApiService {
     ).catch(error => console.log('nothing', error));
     // return this.user.doc(user.uid)
   }
-  getWatchedList(user) {
-    const docRef = this.user.doc(user.uid);
-    docRef.get().then( doc => {
-          if (doc.exists) {
-            this.userData = doc.data().history;
-            console.log(this.userData);
-            console.log('doc data', doc.data());
-          } else {
-            console.log('no doc');
-          }
-        }
-    ).catch(error => console.log('nothing', error));
-    // return this.user.doc(user.uid)
-  }
 }

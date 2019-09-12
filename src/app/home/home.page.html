@@ -15,13 +15,13 @@
 <!--        <ion-card-title>Find selection by category</ion-card-title>-->
       </ion-card-header>
       <ion-card-content>
-        <p>Find you next entertainment option with ease! Select a category below & add items to your favorites or watch list!</p>
+        <p>Select a category below & add movies to your watch list!</p>
       </ion-card-content>
     </ion-card>
 
     <ion-list *ngIf="allTypes">
       <ion-list-header>
-        <ion-title>Popular Categories:</ion-title>
+        <ion-title>Select a category below:</ion-title>
       </ion-list-header>
       <ion-item *ngFor="let category of allTypes" (click)="categoryTapped(category)">
         <ion-icon slot="start" color="medium" name="{{category.icon}}"></ion-icon>

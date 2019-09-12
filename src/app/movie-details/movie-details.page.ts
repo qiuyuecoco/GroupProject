@@ -6,6 +6,7 @@ import {Observable} from 'rxjs';
 import {User} from '../model/user';
 import {AccountService} from '../account.service';
 import * as firebase from 'firebase';
+import {fromDocRef} from "@angular/fire/firestore";
 
 const db = firebase.firestore();
 @Component({
@@ -68,43 +69,28 @@ export class MovieDetailsPage implements OnInit {
         });
   }
 
-  addComment(movieID, comment_text) {
-    let docData: any;
+  addComment(movieID, COMMENT) {
+    // let Comments: any = [];
     const docRef = db.collection('Movie_user_comments').doc(movieID.toString());
+    const userComment = {
+      user: this.accountService.loadedUser.displayName,
+      comment: COMMENT
+    };
     docRef.get()
-        .then(docSnapshot => {
+        .then((docSnapshot) => {
           if (docSnapshot.exists) {
             docRef.onSnapshot((doc) => {
-              docData = doc.data();
-              console.log(docData);
-              this.Comments = docData.comments;
-            });
-            this.Comments.push({
-              user: this.accountService.loadedUser.displayName,
-              comment: comment_text,
-            });
-            docRef.set({
-              comments: this.Comments
-            }).then(() => {
-              console.log(`Document Successfully Updated.`);
-            }).catch((error) => {
-              console.log(`Error Writing Document: ${error}`);
+              docRef.update({
+                comments: firebase.firestore.FieldValue.arrayUnion(userComment)
+              });
             });
           } else {
-            console.log('Create Document');
-            this.Comments.push({
-              user: this.accountService.loadedUser.displayName,
-              comment: comment_text,
-            });
-            docRef.set({
-              comments: this.Comments
-            }).then(() => {
-              console.log(`Document Successfully Written.`);
-            }).catch((error) => {
-              console.log(`Error Writing Document: ${error}`);
-            });
+            docRef.set({comments: [userComment]}); // create the document
           }
         });
+
+    // ref.child('comments').push(userComment);
+
   }
 
   addVote() {

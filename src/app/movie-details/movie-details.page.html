@@ -77,12 +77,14 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col>
-          <ion-item><ion-input id="comment_text"></ion-input></ion-item>
-        </ion-col>
-        <ion-col>
-          <ion-button (click)="addComment(movie.id, document.getElementById('comment_text').value)">COMMENT</ion-button>
-        </ion-col>
+        <ion-card>
+          <ion-card-content>
+            <ion-item><ion-input id="comment_text"></ion-input></ion-item>
+            <div style="display: flex; justify-content: center; justify-items: center; align-content: center; align-items: center; width: 100%; margin-top: 20px;">
+              <ion-button (click)="addComment(movie.id, document.getElementById('comment_text').value)">COMMENT</ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
       </ion-row>
     </ion-card-content>
   </ion-card>

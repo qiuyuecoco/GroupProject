@@ -21,6 +21,8 @@ export class MovieApiService {
   watchedData: number[];
   token;
   userSession;
+  sessionId;
+
 
   private movies: Movies[];
   private baseURL = 'https://api.themoviedb.org/3';
@@ -105,13 +107,23 @@ export class MovieApiService {
     return this.http.get(url).subscribe(data => {
       this.token = data;
       console.log(this.token.request_token);
-    })
+    });
   }
   createUserSession() {
     const url = 'https://api.themoviedb.org/3/authentication/guest_session/new?api_key=4eb5c031eab630e105a371a7a7c4488e';
     return this.http.get(url).subscribe(data => {
       this.userSession = data;
-      console.log(this.userSession);
-    })
+      console.log('guest session: ', this.userSession);
+    });
   }
+  rateMovieWithSessionAndId(movieId, rateValue) {
+    // const rateValue = this.ratingCtrl.value;
+    const url = `https://api.themoviedb.org/3/movie/${movieId}/rating${environment.movieApiKey}&guest_session_id=${this.userSession.guest_session_id}`;
+    return this.http.post(url, {value: rateValue}).subscribe(data => {
+
+      // this.sessionId = data;
+      console.log('session & id: ', this.sessionId);
+    });
+  }
+
 }

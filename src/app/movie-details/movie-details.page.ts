@@ -16,6 +16,7 @@ import {FormControl} from '@angular/forms';
 })
 export class MovieDetailsPage implements OnInit {
   private movie: Movie;
+  voteCount: number;
   private user: User;
   private isChecked = false;
   ratingCtrl = new FormControl();
@@ -55,8 +56,18 @@ export class MovieDetailsPage implements OnInit {
     this.movieApiService.saveMovieToDb(this.user);
   }
 
-  addRating() {
-    const value = this.ratingCtrl.value;
-    console.log(value);
+  addVote() {
+    this.voteCount += 1;
+  }
+  authToken() {
+    this.movieApiService.redirectWithToken().subscribe(data => {
+      console.log(data);
+    });
+  }
+  attachGuestSessionId() {
+    const rateValue = this.ratingCtrl.value;
+    const movieId = this.movieId;
+    this.movieApiService.rateMovieWithSessionAndId(movieId, rateValue);
+    console.log(movieId);
   }
 }

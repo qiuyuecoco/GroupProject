@@ -118,7 +118,7 @@ export class MovieApiService {
   }
   rateMovieWithSessionAndId(movieId, rateValue) {
     // const rateValue = this.ratingCtrl.value;
-    const url = `https://api.themoviedb.org/3/movie/${movieId}/rating${environment.movieApiKey}&guest_session_id=${this.userSession.guest_session_id}`;
+    const url = `${this.baseURL}/movie/${movieId}/rating${environment.movieApiKey}&guest_session_id=${this.userSession.guest_session_id}`;
     return this.http.post(url, {value: rateValue}).subscribe(data => {
 
       // this.sessionId = data;

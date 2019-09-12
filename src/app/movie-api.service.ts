@@ -34,8 +34,7 @@ export class MovieApiService {
     return this.http.get(`${this.baseURL}/authentication/token/new${environment.movieApiKey}`);
   }
   redirectWithToken(token): Observable<any> {
-    return this.http.get(`https://www.themoviedb.org/authenticate/
-    ${token}?redirect_to=http://localhost:8100/approved`);
+    return this.http.get(`https://www.themoviedb.org/authenticate/${token}?redirect_to=http://localhost:8100/approved`);
   }
 
 

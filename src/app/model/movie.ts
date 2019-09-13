@@ -15,12 +15,14 @@ export interface Movie {
     production_companies?: [];
     production_countries?: [];
     release_date?: string;
+    results?: number;
     revenue?: number;
     runtime?: number | null;
     spoken_languages?: [];
     status?: string;
     tagline?: string | null;
     title?: string;
+    total_results?: number;
     video?: boolean;
     vote_average?: number;
     vote_count?: number;

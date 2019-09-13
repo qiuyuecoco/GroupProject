@@ -18,10 +18,10 @@ const db = firebase.firestore();
   styleUrls: ['./movie-details.page.scss'],
 })
 export class MovieDetailsPage implements OnInit {
-  private movie: Movie;
+  public movie: Movie;
   voteCount: number;
   private user: User;
-  private isChecked = false;
+  public isChecked = false;
   private Comments = [];
   document = document;
   ratingCtrl = new FormControl();

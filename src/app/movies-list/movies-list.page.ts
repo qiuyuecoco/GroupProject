@@ -11,7 +11,7 @@ import {Movie} from '../model/movie';
 })
 export class MoviesListPage implements OnInit {
 
-  private movies: Movies[];
+  public movies: Movie;
 
   constructor(
       private movieApiService: MovieApiService,

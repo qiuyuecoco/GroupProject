@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MovieApiService} from '../../movie-api.service';
 import {LoadingController, NavController} from '@ionic/angular';
 import {Movie} from '../../model/movie';
+import {Movies} from '../../model/movies';
 
 @Component({
   selector: 'app-latest',
@@ -9,7 +10,7 @@ import {Movie} from '../../model/movie';
   styleUrls: ['./latest.page.scss'],
 })
 export class LatestPage implements OnInit {
-  private latestType: Movie[];
+  public latestType: Movie;
 
   constructor(
       private api: MovieApiService,

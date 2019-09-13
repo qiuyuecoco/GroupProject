@@ -10,7 +10,7 @@ import {LoadingController, NavController} from '@ionic/angular';
   styleUrls: ['./popular.page.scss'],
 })
 export class PopularPage implements OnInit {
-  private popularMovies: Movies[];
+  public popularMovies: Movie;
 
   constructor(
       private movieApiService: MovieApiService,

@@ -16,7 +16,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: './list/watch-list/watch-list.module#WatchListPageModule'
+            loadChildren: '../list/watch-list/watch-list.module#WatchListPageModule'
           }
         ]
       },
@@ -25,7 +25,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: './list/watched-list/watched-list.module#WatchedListPageModule'
+            loadChildren: '../list/watched-list/watched-list.module#WatchedListPageModule'
           }
         ]
       },

@@ -10,7 +10,7 @@ import {Movie} from '../../model/movie';
   styleUrls: ['./now-playing.page.scss'],
 })
 export class NowPlayingPage implements OnInit {
-  private nowPlaying: Movies[];
+  public nowPlaying: Movie;
   constructor(
       private api: MovieApiService,
       private loader: LoadingController,

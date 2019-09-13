@@ -10,7 +10,7 @@ import {Movies} from '../../model/movies';
   styleUrls: ['./upcoming.page.scss'],
 })
 export class UpcomingPage implements OnInit {
-  private upcoming: Movies[];
+  public upcoming: Movie;
   constructor(
       private api: MovieApiService,
       private loader: LoadingController,

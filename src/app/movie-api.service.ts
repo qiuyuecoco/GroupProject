@@ -38,23 +38,16 @@ export class MovieApiService {
   }
 
   getMovieTypes(type): Observable<any> {
-    return this.http.get(`${this.baseURL}/movie${type}${environment.movieApiKey}`);
+    return this.http.get(`${this.baseURL}/movie${type}${environment.movieApiKey}&include_adult=false`);
   }
 
   dynamicMovieTypes(action, type): Observable<any> {
-    const url = `https://api.themoviedb.org/3/${action}/${type}${environment.movieApiKey}`;
+    const url = `https://api.themoviedb.org/3/${action}/${type}${environment.movieApiKey}&include_adult=false`;
     return this.http.get(url).pipe(map(data => data)
     );
   }
-
-  getPopularMovies(): Observable<Movies[]> {
-    return this.http.get<Movies[]>(environment.popularMovieUrl);
-  }
-  getTopRatedMovies(): Observable<Movies[]> {
-    return this.http.get<Movies[]>(environment.movieDataTopRated);
-  }
   getMovieById(movieId): Observable<Movie> {
-    return this.http.get<Movie>(`${environment.movieBaseUrl}${movieId}${environment.movieApiKey}`)
+    return this.http.get<Movie>(`${environment.movieBaseUrl}${movieId}${environment.movieApiKey}&include_adult=false`)
         .pipe(map(movie => {
       this.selectedMovie = movie;
       return this.selectedMovie;

@@ -8,6 +8,7 @@ import {AccountService} from '../account.service';
 import * as firebase from 'firebase';
 import {fromDocRef} from '@angular/fire/firestore';
 import {FormControl} from '@angular/forms';
+import {ToastController} from '@ionic/angular';
 
 
 const db = firebase.firestore();
@@ -32,6 +33,7 @@ export class MovieDetailsPage implements OnInit {
   constructor(
       private movieApiService: MovieApiService,
       private accountService: AccountService,
+      private toastContoller: ToastController,
       ) { }
 
   ngOnInit() {
@@ -50,6 +52,7 @@ export class MovieDetailsPage implements OnInit {
     if (!this.isChecked) {
       this.movieApiService.watchedList.push(selectedMovie);
       this.movieApiService.saveToWatchedList(this.user);
+      this.presentWatchedListToast();
     }
   }
 
@@ -58,6 +61,7 @@ export class MovieDetailsPage implements OnInit {
     const selectedMovie = this.movieId;
     this.movieApiService.watchList.push(selectedMovie);
     this.movieApiService.saveMovieToDb(this.user);
+    this.presentWatchListToast();
   }
 
   addRating(movieID) {
@@ -86,6 +90,7 @@ export class MovieDetailsPage implements OnInit {
               docRef.update({
                 comments: firebase.firestore.FieldValue.arrayUnion(userComment)
               });
+              this.presentCommentToast();
             });
           } else {
             docRef.set({comments: [userComment]}); // create the document
@@ -108,6 +113,39 @@ export class MovieDetailsPage implements OnInit {
     const rateValue = this.ratingCtrl.value;
     const movieId = this.movieId;
     this.movieApiService.rateMovieWithSessionAndId(movieId, rateValue);
+    this.presentVotedToast();
     console.log(movieId);
+  }
+  async presentWatchListToast() {
+    const toast = await this.toastContoller.create({
+      message: 'Added to Watch List',
+      duration: 2000,
+      position: 'middle',
+    });
+    toast.present();
+  }
+  async presentWatchedListToast() {
+    const toast = await this.toastContoller.create({
+      message: 'Added to Seen It List',
+      duration: 2000,
+      position: 'middle',
+    });
+    toast.present();
+  }
+  async presentVotedToast() {
+    const toast = await this.toastContoller.create({
+      message: 'Thanks for Voting!',
+      duration: 2000,
+      position: 'middle',
+    });
+    toast.present();
+  }
+  async presentCommentToast() {
+    const toast = await this.toastContoller.create({
+      message: 'Comment Added',
+      duration: 2000,
+      position: 'middle',
+    });
+    toast.present();
   }
 }

@@ -11,6 +11,7 @@ import {Movie} from '../model/movie';
 })
 export class SearchPage implements OnInit {
   MoviesList: any = [];
+  document = document;
   movies = {
     upcoming: {
       results: []
@@ -36,38 +37,32 @@ export class SearchPage implements OnInit {
   ngOnInit() {
     this.getMovie();
   }
-  searchByName(category) {
+  newSearch() {
     // @ts-ignore
-    if (document.getElementById('searchCategory').value === 'All') {
-      category = this.movies.All;
-      console.log(category);
+    if (document.getElementById('searchBar').value === '') {
+      // @ts-ignore
+      this.searchByName();
+    } else {
+      // @ts-ignore
+      this.movieAPI.searchMovie(document.getElementById('searchBar').value).subscribe(data => {
+        this.filtered = data.results;
+        console.log(data.results);
+        // tslint:disable-next-line:prefer-for-of
+        this.sortFiltered();
+        this.removeDupes();
+      });
     }
+  }
+  searchByName() {
     // @ts-ignore
-    if (document.getElementById('searchCategory').value === 'Upcoming') {
-      category = this.movies.upcoming.results;
-      console.log(category);
-    }
-    // @ts-ignore
-    if (document.getElementById('searchCategory').value === 'Top Rated') {
-      category = this.movies.top_rated.results;
-      console.log(category);
-    }
-    // @ts-ignore
-    if (document.getElementById('searchCategory').value === 'Popular') {
-      category = this.movies.popular.results;
-      console.log(category);
-    }
-    // @ts-ignore
-    if (document.getElementById('searchCategory').value === 'Now Playing') {
-      category = this.movies.now_playing.results;
-      console.log(category);
-    }
+    const category = this.movies.All;
+
     if (document.getElementById('searchBar')) {
       // @ts-ignore
       const Query = document.getElementById('searchBar').value;
       this.filtered = [];
       // @ts-ignore
-      if (Query !== undefined) {
+      if (Query !== undefined && Query !== '') {
 // tslint:disable-next-line:prefer-for-of
         for (let i = 0; i < category.length; i++) {
           // @ts-ignore
@@ -81,7 +76,7 @@ export class SearchPage implements OnInit {
           }
         }
       } else {
-        this.filtered = category;
+        this.filtered = this.movies.All;
       }
     }
   }
@@ -163,7 +158,14 @@ export class SearchPage implements OnInit {
       return 0;
     });
     console.log(this.MoviesList);
-    this.searchByName(null);
+    this.searchByName();
+  }
+  sortFiltered() {
+    this.filtered.sort((a, b) => {
+      if (a.title < b.title) { return -1; }
+      if (a.title > b.title) { return 1; }
+      return 0;
+    });
   }
   removeDupes() {
     this.MoviesList = Array.from(new Set(this.MoviesList.map(a => a.id)))

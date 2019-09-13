@@ -18,11 +18,11 @@ const db = firebase.firestore();
   styleUrls: ['./movie-details.page.scss'],
 })
 export class MovieDetailsPage implements OnInit {
-  private movie: Movie;
+  public movie: Movie;
   voteCount: number;
-  private user: User;
-  private isChecked = false;
-  private Comments = [];
+  public user: User;
+  public isChecked = false;
+  public Comments = [];
   document = document;
   ratingCtrl = new FormControl();
 
@@ -31,9 +31,9 @@ export class MovieDetailsPage implements OnInit {
   }
 
   constructor(
-      private movieApiService: MovieApiService,
-      private accountService: AccountService,
-      private toastContoller: ToastController,
+      public movieApiService: MovieApiService,
+      public accountService: AccountService,
+      public toastContoller: ToastController,
       ) { }
 
   ngOnInit() {

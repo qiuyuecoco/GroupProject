@@ -25,12 +25,12 @@ export class HomePage {
 
   constructor(
       public accountService: AccountService,
-      private selectedMovie: SelectedMovieService,
-      private navCtrl: NavController,
-      private route: ActivatedRoute,
-      private types: MovieApiService,
-      private loader: LoadingController,
-      private router: Router
+      public selectedMovie: SelectedMovieService,
+      public navCtrl: NavController,
+      public route: ActivatedRoute,
+      public types: MovieApiService,
+      public loader: LoadingController,
+      public router: Router
   ) {
     // console.log('** NAV PARAMS:', this.movieId);
   }

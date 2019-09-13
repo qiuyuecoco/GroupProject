@@ -10,11 +10,11 @@ import {Movie} from '../../model/movie';
   styleUrls: ['./now-playing.page.scss'],
 })
 export class NowPlayingPage implements OnInit {
-  private nowPlaying: Movies[];
+  public nowPlaying: Movies[];
   constructor(
-      private api: MovieApiService,
-      private loader: LoadingController,
-      private navCtrl: NavController
+      public api: MovieApiService,
+      public loader: LoadingController,
+      public navCtrl: NavController
   ) { }
 
   async ngOnInit() {

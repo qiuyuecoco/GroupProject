@@ -10,12 +10,12 @@ import {LoadingController, NavController} from '@ionic/angular';
   styleUrls: ['./popular.page.scss'],
 })
 export class PopularPage implements OnInit {
-  private popularMovies: Movies[];
+  public popularMovies: Movies[];
 
   constructor(
-      private movieApiService: MovieApiService,
-      private navCtrl: NavController,
-      private loader: LoadingController
+      public movieApiService: MovieApiService,
+      public navCtrl: NavController,
+      public loader: LoadingController
   ) { }
 
   async ngOnInit() {

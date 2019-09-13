@@ -22,31 +22,34 @@ export class MovieApiService {
   userSession;
 
 
-  private movies: Movies[];
-  private baseURL = 'https://api.themoviedb.org/3';
-  private tokenUrl = 'https://api.themoviedb.org/3/authentication/token/new?api_key=4eb5c031eab630e105a371a7a7c4488e';
+  public movies: Movies[];
+  public baseURL = 'https://api.themoviedb.org/3';
+  public tokenUrl = 'https://api.themoviedb.org/3/authentication/token/new?api_key=4eb5c031eab630e105a371a7a7c4488e';
 
   constructor(
-      private http: HttpClient,
-      private accountService: AccountService,
+      public http: HttpClient,
+      public accountService: AccountService,
       ) {
     this.user = this.accountService.dB.collection('ACCOUNTS');
   }
   searchMovie(query): Observable<any> {
-    return this.http.get(`${this.baseURL}/search/movie${environment.movieApiKey}&language=en-US&query=${query}&include_adult=false`);
+    // tslint:disable-next-line:max-line-length
+    return this.http.get(`${this.baseURL}/search/movie?api_key=4eb5c031eab630e105a371a7a7c4488e&language=en-US&language=en-US&query=${query}&include_adult=false`);
   }
 
   getMovieTypes(type): Observable<any> {
-    return this.http.get(`${this.baseURL}/movie${type}${environment.movieApiKey}&include_adult=false`);
+    return this.http.get(`${this.baseURL}/movie${type}?api_key=4eb5c031eab630e105a371a7a7c4488e&language=en-US&include_adult=false`);
   }
 
   dynamicMovieTypes(action, type): Observable<any> {
-    const url = `https://api.themoviedb.org/3/${action}/${type}${environment.movieApiKey}&include_adult=false`;
+    // tslint:disable-next-line:max-line-length
+    const url = `https://api.themoviedb.org/3/${action}/${type}?api_key=4eb5c031eab630e105a371a7a7c4488e&language=en-US&include_adult=false`;
     return this.http.get(url).pipe(map(data => data)
     );
   }
   getMovieById(movieId): Observable<Movie> {
-    return this.http.get<Movie>(`${environment.movieBaseUrl}${movieId}${environment.movieApiKey}&include_adult=false`)
+    // tslint:disable-next-line:max-line-length
+    return this.http.get<Movie>(`https://api.themoviedb.org/3/movie/${movieId}?api_key=4eb5c031eab630e105a371a7a7c4488e&language=en-US&include_adult=false`)
         .pipe(map(movie => {
       this.selectedMovie = movie;
       return this.selectedMovie;
@@ -98,7 +101,8 @@ export class MovieApiService {
   }
   rateMovieWithSessionAndId(movieId, rateValue) {
     // const rateValue = this.ratingCtrl.value;
-    const url = `${this.baseURL}/movie/${movieId}/rating${environment.movieApiKey}&guest_session_id=${this.userSession.guest_session_id}`;
+    // tslint:disable-next-line:max-line-length
+    const url = `${this.baseURL}/movie/${movieId}/rating?api_key=4eb5c031eab630e105a371a7a7c4488e&language=en-US&guest_session_id=${this.userSession.guest_session_id}`;
     return this.http.post(url, {value: rateValue}).subscribe(data => {
       // this.sessionId = data;
       console.log('session & id: ', this.userSession);

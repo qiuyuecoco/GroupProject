@@ -10,11 +10,11 @@ import {Movies} from '../../model/movies';
   styleUrls: ['./upcoming.page.scss'],
 })
 export class UpcomingPage implements OnInit {
-  private upcoming: Movies[];
+  public upcoming: Movies[];
   constructor(
-      private api: MovieApiService,
-      private loader: LoadingController,
-      private navCtrl: NavController
+      public api: MovieApiService,
+      public loader: LoadingController,
+      public navCtrl: NavController
   ) { }
 
   async ngOnInit() {

@@ -19,8 +19,8 @@ export class ListPage implements OnInit {
   get if(): number {
     return this.selectedMovie.movie.id;
   }
-  // private selectedItem: any;
-  // private icons = [
+  // public selectedItem: any;
+  // public icons = [
   //   'flask',
   //   'wifi',
   //   'beer',
@@ -34,7 +34,7 @@ export class ListPage implements OnInit {
   // ];
   // public items: Array<{ title: string; note: string; icon: string }> = [];
   constructor(
-      private selectedMovie: SelectedMovieService
+      public selectedMovie: SelectedMovieService
   ) {
     // for (let i = 1; i < 6; i++) {
     //   this.items.push({

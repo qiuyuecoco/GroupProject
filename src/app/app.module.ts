@@ -22,7 +22,15 @@ import {FormsModule} from '@angular/forms';
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(),
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp({
+      apiKey: 'AIzaSyBzxRLUs8ZMvV53CKhfpNHilXii_puTapk',
+      authDomain: 'ionic-group-project.firebaseapp.com',
+      databaseURL: 'https://ionic-group-project.firebaseio.com',
+      projectId: 'ionic-group-project',
+      storageBucket: 'ionic-group-project.appspot.com',
+      messagingSenderId: '538019533720',
+      appId: '1:538019533720:web:fe98a59e19674c74'
+    }),
     AngularFirestoreModule,
     AppRoutingModule,
     FormsModule,

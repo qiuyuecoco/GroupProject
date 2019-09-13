@@ -29,9 +29,9 @@ export class SearchPage implements OnInit {
   };
   filtered: any[] = [];
   constructor(
-      private movieAPI: MovieApiService,
-      private movieApiService: MovieApiService,
-      private navCtrl: NavController,
+      public movieAPI: MovieApiService,
+      public movieApiService: MovieApiService,
+      public navCtrl: NavController,
   ) { }
 
   ngOnInit() {

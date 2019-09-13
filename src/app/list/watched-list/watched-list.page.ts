@@ -13,14 +13,14 @@ import {AccountService} from '../../account.service';
 })
 export class WatchedListPage implements OnInit {
   watched: number[] = [];
-  private movie: Movie [] = [];
-  private user: User;
+  public movie: Movie [] = [];
+  public user: User;
 
   constructor(
-      private api: MovieApiService,
-      private loader: LoadingController,
-      private navCtrl: NavController,
-      private accountService: AccountService
+      public api: MovieApiService,
+      public loader: LoadingController,
+      public navCtrl: NavController,
+      public accountService: AccountService
   ) {
   }
 

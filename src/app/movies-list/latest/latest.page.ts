@@ -9,12 +9,12 @@ import {Movie} from '../../model/movie';
   styleUrls: ['./latest.page.scss'],
 })
 export class LatestPage implements OnInit {
-  private latestType: Movie[];
+  public latestType: Movie[];
 
   constructor(
-      private api: MovieApiService,
-      private loader: LoadingController,
-      private navCtrl: NavController
+      public api: MovieApiService,
+      public loader: LoadingController,
+      public navCtrl: NavController
   ) { }
 
   async ngOnInit() {

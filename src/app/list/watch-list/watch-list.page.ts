@@ -12,14 +12,14 @@ import {LoadingController, NavController} from '@ionic/angular';
 })
 export class WatchListPage implements OnInit {
   watchList: number[] = [];
-  private movie: Movie[] = [];
-  private user: User;
+  public movie: Movie[] = [];
+  public user: User;
 
   constructor(
-      private movieApiService: MovieApiService,
-      private accountService: AccountService,
-      private loader: LoadingController,
-      private navCtrl: NavController
+      public movieApiService: MovieApiService,
+      public accountService: AccountService,
+      public loader: LoadingController,
+      public navCtrl: NavController
       ) {
   }
 

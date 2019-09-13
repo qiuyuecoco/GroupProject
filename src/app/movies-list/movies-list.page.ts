@@ -11,12 +11,12 @@ import {Movie} from '../model/movie';
 })
 export class MoviesListPage implements OnInit {
 
-  private movies: Movies[];
+  public movies: Movies[];
 
   constructor(
-      private movieApiService: MovieApiService,
-      private loader: LoadingController,
-      private navCtrl: NavController,
+      public movieApiService: MovieApiService,
+      public loader: LoadingController,
+      public navCtrl: NavController,
   ) { }
 
   async ngOnInit() {

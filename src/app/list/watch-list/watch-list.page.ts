@@ -21,7 +21,6 @@ export class WatchListPage implements OnInit {
       private loader: LoadingController,
       private navCtrl: NavController
       ) {
-    this.watchList = this.movieApiService.userData;
   }
 
   async ngOnInit() {
@@ -31,7 +30,7 @@ export class WatchListPage implements OnInit {
       message: 'getting data'
     });
     loading.present().then(() => {
-        this.watchList = this.movieApiService.userData;
+        this.watchList = this.movieApiService.watchList;
         console.log(this.watchList);
         for (let m = 0; m < this.watchList.length; m++) {
           this.movieApiService.getMovieById(this.watchList[m]).subscribe(movie => {

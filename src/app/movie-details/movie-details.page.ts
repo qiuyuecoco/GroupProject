@@ -49,19 +49,41 @@ export class MovieDetailsPage implements OnInit {
 
   addToWatchedList() {
     const selectedMovie = this.movieId;
-    if (!this.isChecked) {
-      this.movieApiService.watchedList.push(selectedMovie);
-      this.movieApiService.saveToWatchedList(this.user);
-      this.presentWatchedListToast();
+    const watchedList = this.movieApiService.watchedList;
+    let exists = false;
+    for (let m = 0; m < watchedList.length; m++) {
+      if (selectedMovie === watchedList[m]) {
+        console.log('already added' + watchedList[m]);
+        this.presentMovieExistsToast();
+        exists = true;
+      }
+    }
+    if (exists === false) {
+      if (!this.isChecked) {
+        this.movieApiService.watchedList.push(selectedMovie);
+        this.movieApiService.saveToWatchedList(this.user);
+        this.presentWatchedListToast();
+      }
     }
   }
 
 
   addToWatchlist() {
     const selectedMovie = this.movieId;
-    this.movieApiService.watchList.push(selectedMovie);
-    this.movieApiService.saveMovieToDb(this.user);
-    this.presentWatchListToast();
+    const watchList = this.movieApiService.watchList;
+    let exists = false;
+    for (let m = 0; m < watchList.length; m++) {
+      if (selectedMovie === watchList[m]) {
+        console.log('already added' + watchList[m]);
+        this.presentMovieExistsToast();
+        exists = true;
+      }
+    }
+    if (exists === false) {
+      this.movieApiService.watchList.push(selectedMovie);
+      this.movieApiService.saveMovieToDb(this.user);
+      this.presentWatchListToast();
+    }
   }
 
   addRating(movieID) {
@@ -143,6 +165,14 @@ export class MovieDetailsPage implements OnInit {
   async presentCommentToast() {
     const toast = await this.toastContoller.create({
       message: 'Comment Added',
+      duration: 2000,
+      position: 'middle',
+    });
+    toast.present();
+  }
+  async presentMovieExistsToast() {
+    const toast = await this.toastContoller.create({
+      message: 'Movie Already Added',
       duration: 2000,
       position: 'middle',
     });

@@ -18,7 +18,6 @@ export class MovieApiService {
   user: firebase.firestore.CollectionReference;
   userData: number[];
   watchedList: number[] = [];
-  watchedData: number[];
   token;
   userSession;
 
@@ -76,8 +75,8 @@ export class MovieApiService {
     // console.log(docRef);
     docRef.get().then( doc => {
       if (doc.exists) {
-        this.userData = doc.data().watchlist;
-        this.watchedData = doc.data().history;
+        this.watchList = doc.data().watchlist;
+        this.watchedList = doc.data().history;
         // console.log(this.userData);
         // console.log('doc data', doc.data());
       } else {

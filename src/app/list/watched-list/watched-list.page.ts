@@ -22,7 +22,6 @@ export class WatchedListPage implements OnInit {
       private navCtrl: NavController,
       private accountService: AccountService
   ) {
-    this.watched = this.api.userData;
   }
 
   async ngOnInit() {
@@ -33,7 +32,7 @@ export class WatchedListPage implements OnInit {
     });
     // const selectedMovieId = this.watched;
     loading.present().then(() => {
-      this.watched = this.api.watchedData;
+      this.watched = this.api.watchedList;
       console.log(this.watched);
       for (let i = 0; i < this.watched.length; i++) {
         this.api.getMovieById(this.watched[i]).subscribe(data => {

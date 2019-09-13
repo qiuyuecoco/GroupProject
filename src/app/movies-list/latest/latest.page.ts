@@ -8,7 +8,6 @@ import {Movie} from '../../model/movie';
   templateUrl: './latest.page.html',
   styleUrls: ['./latest.page.scss'],
 })
-// TODO: DO NOT IMPLEMENT; inappropriate for class/work
 export class LatestPage implements OnInit {
   private latestType: Movie[];
 
@@ -18,12 +17,24 @@ export class LatestPage implements OnInit {
       private navCtrl: NavController
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    const loading = await this.loader.create({
+      message: 'latest...'
+    });
     const type = '/latest';
-    this.api.getMovieTypes(type).subscribe(data => {
+    loading.present().then(() => {
+      this.api.getMovieTypes(type).subscribe(data => {
         this.latestType = data;
+        loading.dismiss();
+      });
     });
   }
+  // ngOnInit() {
+  //   const type = '/latest';
+  //   this.api.getMovieTypes(type).subscribe(data => {
+  //       this.latestType = data;
+  //   });
+  // }
   movieClicked(movie: Movie) {
     this.api.movie = movie;
     this.navCtrl.navigateForward('movie-details');
